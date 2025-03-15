@@ -13,25 +13,26 @@
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico') }}" />
 
     <!-- TITLE -->
     <title>{{ env('APP_NAME') }} </title>
 
     <!-- BOOTSTRAP CSS -->
-    <link id="style" href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
 
     <!-- STYLE CSS -->
-    <link href="../assets/css/style.css" rel="stylesheet" />
-    <link href="../assets/css/dark-style.css" rel="stylesheet" />
-    <link href="../assets/css/transparent-style.css" rel="stylesheet">
-    <link href="../assets/css/skin-modes.css" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/dark-style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/transparent-style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/skin-modes.css') }}" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
-    <link href="../assets/css/icons.css" rel="stylesheet" />
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" />
 
     <!-- COLOR SKIN CSS -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all" href="../assets/colors/color1.css" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all"
+        href="{{ asset('assets/colors/color1.css') }}" />
 
 
 
@@ -41,7 +42,7 @@
 
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+        <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
     <!-- /GLOBAL-LOADER -->
 
@@ -68,6 +69,12 @@
                                 placeholder="Search for results...">
                             <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                         </div>
+
+                        <!-- Placeholder for search results -->
+                        <div id="search-results" class="search-results-container" style="display:none;">
+                            <!-- Results will be populated here -->
+                        </div>
+
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <!-- SEARCH -->
                             <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
@@ -286,7 +293,8 @@
                                                             <h5 class="text-dark mb-0 fs-14 fw-semibold">
                                                                 {{ Auth::user()->name }} <br>
                                                                 <!-- Display the authenticated user's name -->
-                                                                <small class="text-muted" style="text-transform: capitalize;">{{ Auth::user()->option }}</small>
+                                                                <small class="text-muted"
+                                                                    style="text-transform: capitalize;">{{ Auth::user()->option }}</small>
                                                             </h5>
                                                         @else
                                                             <h5 class="text-dark mb-0 fs-14 fw-semibold">Guest</h5>
@@ -558,19 +566,18 @@
                                 <h3>Creation Kit</h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="{{route('register')}}"><i
                                         class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Create
                                         New</span></a>
-                                <ul class="slide-menu">
-                                    <!-- <li class="side-menu-label1"><a href="javascript:void(0)">Pages</a></li> -->
+                                {{-- <ul class="slide-menu">
                                     <li><a href="profile.html" class="slide-item"> Organization</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="{{route('coming')}}"><i
                                         class="side-menu__icon fe fe-shopping-bag"></i><span
                                         class="side-menu__label">Market Place</span></a>
-                                <ul class="slide-menu">
+                                {{-- <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">E-Commerce</a></li>
                                     <li><a href="shop.html" class="slide-item"> Shop</a></li>
                                     <li><a href="shop-description.html" class="slide-item"> Product Details</a></li>
@@ -578,7 +585,7 @@
                                     <li><a href="add-product.html" class="slide-item"> Add Product</a></li>
                                     <li><a href="wishlist.html" class="slide-item"> Wishlist</a></li>
                                     <li><a href="checkout.html" class="slide-item"> Checkout</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
@@ -587,7 +594,8 @@
                                 <ul class="slide-menu">
                                     <!-- <li class="side-menu-label1"><a href="javascript:void(0)">Pages</a></li> -->
                                     <a href="https://chatgpt.com" target="_blank" class="slide-item">ChatGPT</a>
-                                    <a href="https://grok.com/?referrer=website" target="_blank" class="slide-item">Grok 3</a>
+                                    <a href="https://grok.com/?referrer=website" target="_blank"
+                                        class="slide-item">Grok 3</a>
                                 </ul>
                             </li>
                         </ul>

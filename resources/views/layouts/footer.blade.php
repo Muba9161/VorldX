@@ -96,42 +96,42 @@
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 <!-- JQUERY JS -->
-<script src="../assets/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- BOOTSTRAP JS -->
-<script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
 <!-- SIDEBAR JS -->
-<script src="../assets/plugins/sidebar/sidebar.js"></script>
+<script src="{{ asset('assets/plugins/sidebar/sidebar.js') }}"></script>
 
 <!-- SIDE-MENU JS -->
-<script src="../assets/plugins/sidemenu/sidemenu.js"></script>
+<script src="{{ asset('assets/plugins/sidemenu/sidemenu.js') }}"></script>
 
 <!-- TypeHead js -->
-<script src="../assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
-<script src="../assets/js/typehead.js"></script>
+<script src="{{ asset('assets/plugins/bootstrap5-typehead/autocomplete.js') }}"></script>
+<script src="{{ asset('assets/js/typehead.js') }}"></script>
 
 <!-- INTERNAL File-Uploads Js-->
-<script src="../assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-<script src="../assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-<script src="../assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-<script src="../assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-<script src="../assets/plugins/fancyuploder/fancy-uploader.js"></script>
+<script src="{{ asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+<script src="{{ asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+<script src="{{ asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+<script src="{{ asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
 <!-- Perfect SCROLLBAR JS-->
-<script src="../assets/plugins/p-scroll/perfect-scrollbar.js"></script>
-<script src="../assets/plugins/p-scroll/pscroll.js"></script>
-<script src="../assets/plugins/p-scroll/pscroll-1.js"></script>
+<script src="{{ asset('assets/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('assets/plugins/p-scroll/pscroll.js') }}"></script>
+<script src="{{ asset('assets/plugins/p-scroll/pscroll-1.js') }}"></script>
 
 <!-- Color Theme js -->
-<script src="../assets/js/themeColors.js"></script>
+<script src="{{ asset('assets/js/themeColors.js') }}"></script>
 
 <!-- Sticky js -->
-<script src="../assets/js/sticky.js"></script>
+<script src="{{ asset('assets/js/sticky.js') }}"></script>
 
 <!-- CUSTOM JS-->
-<script src="../assets/js/custom.js"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -272,12 +272,12 @@
             }
 
             var destinationFolderId = $(this).data(
-            'folder-id'); // The folder where we want to paste the copied folder
+                'folder-id'); // The folder where we want to paste the copied folder
 
             // Send AJAX request to paste the folder into the destination folder
             $.ajax({
                 url: '/folders/' + copiedFolderId +
-                '/paste', // Backend route for pasting folder
+                    '/paste', // Backend route for pasting folder
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -303,7 +303,73 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        // Handle follow button click
+        $('#followButton').on('click', function() {
+            const organizationId = $(this).data('organization-id'); // Get the organization ID
+            const button = $(this);
 
+            // Send the follow request via AJAX
+            $.ajax({
+                url: `/follow/${organizationId}`, // The route for following an organization
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr(
+                        'content'), // CSRF token for security
+                },
+                success: function(response) {
+                    // On success, change the button to "Following"
+                    button.html('<i class="fa fa-check"></i> <span>Following</span>');
+                    button.prop('disabled', true); // Disable the button after follow
+                    alert(response.success); // Show a success message
+                },
+                error: function(xhr) {
+                    // On error, show an alert with the error message
+                    alert(xhr.responseJSON.error || 'An error occurred');
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('typehead');
+        const resultsContainer = document.getElementById('search-results');
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value;
+
+            // Check if the search query is not empty (minimum 2 characters)
+            if (query.length >= 2) {
+                fetch(`/search-organizations?q=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.organizations.length > 0) {
+                            resultsContainer.style.display = 'block'; // Show the results container
+                            resultsContainer.innerHTML = ''; // Clear previous results
+                            data.organizations.forEach(org => {
+                                const resultItem = document.createElement('div');
+                                resultItem.classList.add('search-result-item');
+                                resultItem.textContent = org
+                                .name; // Assuming 'name' is the organization name field
+                                resultsContainer.appendChild(resultItem);
+                            });
+                        } else {
+                            resultsContainer.style.display = 'none'; // Hide if no results
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching organizations:', error);
+                    });
+            } else {
+                resultsContainer.style.display =
+                'none'; // Hide results if query is less than 2 characters
+            }
+        });
+    });
+</script>
 
 </body>
 

@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BasicController;
+use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\FollowRequestController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
@@ -62,5 +66,23 @@ Route::post('/entity/{entity}/copy', [EntityController::class, 'copy'])->name('e
 Route::delete('/entity/{entity}', [EntityController::class, 'destroy'])->name('entity.destroy');
 
 
+// Company Follow
+Route::post('/follow/{organization}', [FollowRequestController::class, 'follow'])->name('follow');
 
-require __DIR__.'/auth.php';
+// Organization routes to manage followers
+Route::get('/organization/{organization}/followers', [OrganizationController::class, 'followers'])->name('organization.followers');
+Route::post('/organization/{organization}/accept-follow/{user}', [OrganizationController::class, 'acceptFollow'])->name('organization.acceptFollow');
+Route::post('/organization/{organization}/reject-follow/{user}', [OrganizationController::class, 'rejectFollow'])->name('organization.rejectFollow');
+Route::get('/search-organizations', [OrganizationController::class, 'search'])->name('organizations.search');
+
+// Calender Route
+Route::get('/calender', [CalenderController::class, 'index'])->name('calender');
+
+
+// Coming Route
+Route::get('/coming', [BasicController::class, 'coming'])->name('coming');
+
+
+
+
+require __DIR__ . '/auth.php';

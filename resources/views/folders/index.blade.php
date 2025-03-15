@@ -4,7 +4,7 @@
 
 @section('website-active-folders/index', 'active')
 
-@section('website-main-section') <!--app-content open-->
+@section('website-main-section') 
 
 
     <!--app-content open-->
@@ -296,7 +296,10 @@
                 <div class="tabs-menu border-bottom">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li class=""><a href="#side1" class="active" data-bs-toggle="tab"><i
+                        <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-home"></i> Profile</a></li>
+                        {{-- <li class=""><a href="#side1" class="active" data-bs-toggle="tab"><i
+                                    class="fe fe-git-branch me-1"></i>Strings</a></li> --}}
+                        <li class=""><a href="{{route('calender')}}" class="active"><i
                                     class="fe fe-git-branch me-1"></i>Strings</a></li>
                         <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-mail"></i> Mail</a></li>
                         <li><a href="#side3" data-bs-toggle="tab"><i class="fe fe-clock me-1"></i>Activity</a>
