@@ -18,21 +18,31 @@
     <!-- TITLE -->
     <title>{{ env('APP_NAME') }} </title>
 
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+
     <!-- BOOTSTRAP CSS -->
-    <link id="style" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link id="style" href="{{ asset('../assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
 
     <!-- STYLE CSS -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/dark-style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/transparent-style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/skin-modes.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/dark-style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/transparent-style.css') }}" rel="stylesheet">
+    <link href="{{ asset('../assets/css/skin-modes.css') }}" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/icons.css') }}" rel="stylesheet" />
 
-    <!-- COLOR SKIN CSS -->
+    <!-- APEXCHARTS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"></link>
     <link id="theme" rel="stylesheet" type="text/css" media="all"
-        href="{{ asset('assets/colors/color1.css') }}" />
+        href="{{ asset('../assets/colors/color1.css') }}" />
+
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> --}}
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
 
 
 
@@ -101,10 +111,11 @@
                                             </div>
                                         </div>
                                         <div class="d-flex country">
-                                            <a class="nav-link icon text-center" data-bs-target="#country-selector"
-                                                data-bs-toggle="modal">
+                                            <a class="nav-link icon text-center" href="{{ route('followlist') }}"
+                                                target="_blank" data-bs-toggle="tooltip"
+                                                data-bs-original-title="Connect Around">
                                                 <i class="fe fe-globe"></i><span
-                                                    class="fs-16 ms-2 d-none d-xl-block">English</span>
+                                                    class="fs-16 ms-2 d-none d-xl-block"></span>
                                             </a>
                                         </div>
                                         <!-- COUNTRY -->
@@ -281,8 +292,11 @@
                                         <div class="dropdown d-flex profile-1">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
-                                                <img src="../assets/images/users/21.jpg" alt="profile-user"
-                                                    class="avatar  profile-user brround cover-image">
+                                                @if (Auth::user())
+                                                    
+                                                <img src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}" alt="profile-user"
+                                                    class="avatar  profile-user brround cover-image" style="object-fit: cover;">
+                                                @endif
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
@@ -566,7 +580,7 @@
                                 <h3>Creation Kit</h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="{{route('register')}}"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('register') }}"><i
                                         class="side-menu__icon fe fe-plus"></i><span class="side-menu__label">Create
                                         New</span></a>
                                 {{-- <ul class="slide-menu">
@@ -574,7 +588,7 @@
                                 </ul> --}}
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="{{route('coming')}}"><i
+                                <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('coming') }}"><i
                                         class="side-menu__icon fe fe-shopping-bag"></i><span
                                         class="side-menu__label">Market Place</span></a>
                                 {{-- <ul class="slide-menu">

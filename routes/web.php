@@ -30,6 +30,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -66,14 +67,7 @@ Route::post('/entity/{entity}/copy', [EntityController::class, 'copy'])->name('e
 Route::delete('/entity/{entity}', [EntityController::class, 'destroy'])->name('entity.destroy');
 
 
-// Company Follow
-Route::post('/follow/{organization}', [FollowRequestController::class, 'follow'])->name('follow');
 
-// Organization routes to manage followers
-Route::get('/organization/{organization}/followers', [OrganizationController::class, 'followers'])->name('organization.followers');
-Route::post('/organization/{organization}/accept-follow/{user}', [OrganizationController::class, 'acceptFollow'])->name('organization.acceptFollow');
-Route::post('/organization/{organization}/reject-follow/{user}', [OrganizationController::class, 'rejectFollow'])->name('organization.rejectFollow');
-Route::get('/search-organizations', [OrganizationController::class, 'search'])->name('organizations.search');
 
 // Calender Route
 Route::get('/calender', [CalenderController::class, 'index'])->name('calender');
@@ -82,7 +76,22 @@ Route::get('/calender', [CalenderController::class, 'index'])->name('calender');
 // Coming Route
 Route::get('/coming', [BasicController::class, 'coming'])->name('coming');
 
+// FollowList Route
 
+Route::get('/followlist', [BasicController::class, 'followlist'])->name('followlist');
 
+// OrgFollowList
+
+Route::get('/orgfollow',[BasicController::class, 'orgfollow'])->name('orgfollow');
+Route::get('/following',[BasicController::class, 'following'])->name('following');
+
+// To view Profile Route
+
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
+// To follow or unfollow routes
+
+Route::get('/profile/{user}/follow',[ProfileController::class, 'follow'])->name('profile.follow');
+Route::get('/profile/{user}/unfollow',[ProfileController::class, 'unfollow'])->name('profile.unfollow');
 
 require __DIR__ . '/auth.php';

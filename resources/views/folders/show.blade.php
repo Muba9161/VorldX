@@ -42,7 +42,43 @@
             </div>
         </div>
 
+        {{-- Options Selector for form --}}
+        <div class="modal fade" id="option-selector">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content country-select-modal">
+                    <div class="modal-header">
+                        <h6 class="modal-title">What do you want to add?</h6><button aria-label="Close" class="btn-close"
+                            data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="row p-3">
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
+                                    data-bs-target="#createspace" data-bs-toggle="modal">
+                                    <span class="country-selector"><i class="fa fa-home me-3 language"
+                                            style="color: #6c5ffc;"></i></span>Space
+                                </a>
 
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                                    data-bs-target="#createfolder" data-bs-toggle="modal">
+                                    <span class="country-selector"><i class="fa fa-folder me-3 language"
+                                            style="color: #6c5ffc;"></i></span>Folder
+                                </a>
+                            </li>
+                            <li class="col-lg-6 mb-2">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
+                                    data-bs-target="#uploadfile" data-bs-toggle="modal">
+                                    <span class="country-selector"><i class="fa fa-file me-3 language"
+                                            style="color: #6c5ffc;"></i></span>File
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Modal with overlay -->
         <div id="modalOverlay" class="modal-overlay" style="display:none;">
@@ -93,10 +129,11 @@
                                 <a class="text-white" href="{{ route('folders.index') }}">File Manager</a>
                             </li>
 
-                            @foreach($breadcrumb as $folder)
+                            @foreach ($breadcrumb as $folder)
                                 <li class="breadcrumb-item">
                                     <i class="fa fa-chevron-right me-2 text-white" aria-hidden="true"></i>
-                                    <a class="text-white" href="{{ route('folders.show', $folder->id) }}">{{ $folder->name }}</a>
+                                    <a class="text-white"
+                                        href="{{ route('folders.show', $folder->id) }}">{{ $folder->name }}</a>
                                 </li>
                             @endforeach
                         </ol>
@@ -114,25 +151,33 @@
                     <div class="col-md-5 col-lg-5 col-xl-3">
                         <div class="card">
                             <div class="card-body text-center">
-                                <button class="btn btn-primary btn-block" data-bs-target="#createfile"
+                                <button class="btn btn-primary btn-block" data-bs-target="#option-selector"
                                     data-bs-toggle="modal">
-                                    <i class="fe fe-plus me-1"></i> Create New
+                                    <i class="fe fe-plus me-1"></i> Add
                                 </button>
                             </div>
                             <div class="card-body">
-                                <div class="list-group list-group-transparent mb-0">
-                                    <a href="javascript:void(0);"
-                                        class="list-group-item d-flex align-items-center px-0 py-2">
-                                        <span class="text-success me-2 fs-12"><i class="fe fe-circle"></i></span>Total
-                                        Folders : {{ $count }}
-                                    </a>
-
-                                    <a href="#" class="list-group-item d-flex align-items-center px-0 py-2">
-                                        <span class="text-success me-2 fs-12"><i class="fe fe-circle"></i></span>Total
-                                        Sub Folders : {{ $subcount }}
-                                    </a>
-
-                                </div>
+                                @foreach ($breadcrumb as $folder)
+                                    <div class="col-lg-8 mt-8 mt-lg-0">
+                                        <ul id="tree2">
+                                            <li><a href="javascript:void(0)">File Manager</a>
+                                                <ul>
+                                                    <li>Employees
+                                                        <ul>
+                                                            <li>Reports
+                                                                <ul>
+                                                                    <li>Report1</li>
+                                                                    <li>Report2</li>
+                                                                    <li>Report3</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -734,10 +779,37 @@
     </div>
     <!--/Sidebar-right-->
 
-    <!-- Modal -->
-    <div class="modal" id="createfile">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-content-demo">
+    {{-- Modal for Space creation --}}
+    <div class="modal fade" id="createspace">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
+                </div>
+                <div class="modal-body">
+                    <!-- Folder Creation Form -->
+                    <h2>Create Space</h2>
+                    <form action="{{ route('folders.store', $folder->id ?? null) }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Space Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button"
+                            data-bs-target="#option-selector" data-bs-toggle="modal">Cancel</button>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal for Folder creation --}}
+    <div class="modal fade" id="createfolder">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
                 <div class="modal-header">
                     {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
                 </div>
@@ -752,17 +824,41 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Create</button>
-                        <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button"
+                            data-bs-target="#option-selector" data-bs-toggle="modal">Cancel</button>
                     </form>
                     <hr>
                 </div>
-                {{-- <div class="modal-footer">
-                <button class="btn ripple btn-primary" type="button">Add</button>
-            </div> --}}
             </div>
         </div>
     </div>
 
-    <!-- End Modal -->
+
+    {{-- Modal for File creation --}}
+    <div class="modal fade" id="uploadfile">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
+                </div>
+                <div class="modal-body">
+                    <!-- Folder Creation Form -->
+                    <h2>Upload a File</h2>
+                    <form action="{{ route('folders.store', $folder->id ?? null) }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Folder Name</label>
+                            <input type="file" name="filename" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button class="btn ripple btn-danger" data-bs-target="#option-selector" data-bs-toggle="modal"
+                            type="button">Cancel</button>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('website-page-title', 'Dashboard')
+@section('website-page-title', 'Show')
 
-@section('website-active-dashboard', 'active')
+@section('website-active-show', 'active')
 
 @section('website-main-section')
     <!--app-content open-->
@@ -35,7 +35,8 @@
                                             <div class="row">
                                                 <div class="panel profile-cover">
                                                     <div class="profile-cover__action bg-img">
-                                                        <img src="{{ asset('storage/banner_images/' . $user->banner_image) }}" alt="">
+                                                        <img src="{{ asset('storage/banner_images/' . $user->banner_image) }}"
+                                                            alt="">
                                                     </div>
                                                     <div class="profile-cover__img">
                                                         <div class="profile-img-1">
@@ -47,18 +48,31 @@
                                                         <div class="profile-img-content text-dark text-start">
                                                             <div class="text-dark">
 
-                                                                @if (Auth::check())
-                                                                    <h3 class="h3 mb-2">{{ Auth::user()->name }}</h3>
-                                                                    <h5 class="text-muted"> {{ Auth::user()->email }}</h5>
-                                                                @endif
+                                                                <h3 class="h3 mb-2">{{ $user->name }}</h3>
+                                                                <h5 class="text-muted"> {{ $user->email }}</h5>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="btn-profile">
-                                                        <a href="{{ route('profile.edit') }}"><button
-                                                                class="btn btn-danger mt-1 mb-1"> <i
-                                                                    class="fa fa-envelope"></i> <span>Edit
-                                                                    Profile</span></button></a>
+                                                        @if (Auth::user()->id != $user->id)
+                                                            @if (Auth::user()->isFollowing($user))
+                                                                <form action="{{ route('profile.unfollow', $user) }}"
+                                                                    method="GET">
+                                                                    @csrf
+                                                                    <button class="btn btn-primary mt-1 mb-1"> <i
+                                                                            class="fa fa-rss"></i>
+                                                                        <span>Unfollow</span></button>
+                                                                @else
+                                                                    <form action="{{ route('profile.follow', $user) }}"
+                                                                        method="GET">
+                                                                        @csrf
+                                                                        <button class="btn btn-primary mt-1 mb-1"> <i
+                                                                                class="fa fa-rss"></i>
+                                                                            <span>Follow</span></button>
+                                                            @endif
+
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,7 +140,8 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <span class="text-muted">
-                                                            <a href="{{ route('orgfollow') }}">Followers</a>
+                                                            <a href="{{ route('orgfollow', $user->id) }}"
+                                                                target="_blank">Followers</a>
                                                         </span>
                                                         <div class="fw-semibold fs-25">
                                                             {{ $followerCount }}
@@ -142,9 +157,7 @@
                                                         </span>
                                                     </div>
                                                     <div class="media-body">
-                                                        <span class="text-muted">
-                                                            <a href="{{ route('following') }}">Following</a>
-                                                        </span>
+                                                        <a href="{{ route('following', $user->id) }}">Following</a>
                                                         <div class="fw-semibold fs-25">
                                                             {{ $followingCount }}
                                                         </div>
@@ -1186,6 +1199,25 @@
                                     <i class="task-icon1"></i>
                                     <h6 class="fw-semibold">New Comment<span class="text-muted fs-11 mx-2 fw-normal">25
                                             June 2021</span></h6>
+                                    <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)"
+                                            class="fw-semibold"> AngularJS
+                                            Template</a></p>
+                                </div>
+                                <div class="ms-auto d-md-flex me-3">
+                                    <a href="javascript:void(0)" class="text-muted me-2"><span
+                                            class="fe fe-edit"></span></a>
+                                    <a href="javascript:void(0)" class="text-muted"><span
+                                            class="fe fe-trash-2"></span></a>
+                                </div>
+                            </li>
+                            <li class="d-sm-flex">
+                                <div>
+                                    <i class="task-icon1"></i>
+                                    <h6 class="fw-semibold">Task Overdue<span class="text-muted fs-11 mx-2 fw-normal">14
+                                            June 2021</span></h6>
+                                    <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
+                                            href="javascript:void(0)" class="fw-semibold"> Integrated
+                                            management</a></p>
                                 </div>
                                 <div class="ms-auto d-md-flex me-3">
                                     <a href="javascript:void(0)" class="text-muted me-2"><span
