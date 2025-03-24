@@ -96,6 +96,11 @@
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 
+{{-- Scroll Bar --}}
+<script src="{{ asset('../assets/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('../assets/plugins/p-scroll/pscroll.js') }}"></script>
+<script src="{{ asset('../assets/plugins/p-scroll/pscroll-1.js') }}"></script>
+
 <!-- DROPIFY CSS -->
 <link href="{{ asset('assets/plugins/dropify/css/dropify.css') }}" rel="stylesheet" />
 <!-- DROPIFY JS -->
@@ -180,7 +185,17 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- Internal Chat js-->
+<script src="{{ asset('../assets/js/chat.js') }}"></script>
+
+<!-- Color Theme js -->
+<script src="{{ asset('../assets/js/themeColors.js') }}"></script>
+
+
+<!-- CUSTOM JS -->
+<script src="{{ asset('../assets/js/custom.js') }}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
     let folderIdToDelete = null; // Variable to hold the folder ID
@@ -398,7 +413,7 @@
                                 const resultItem = document.createElement('div');
                                 resultItem.classList.add('search-result-item');
                                 resultItem.textContent = org
-                                .name; // Assuming 'name' is the organization name field
+                                    .name; // Assuming 'name' is the organization name field
                                 resultsContainer.appendChild(resultItem);
                             });
                         } else {
@@ -410,7 +425,7 @@
                     });
             } else {
                 resultsContainer.style.display =
-                'none'; // Hide results if query is less than 2 characters
+                    'none'; // Hide results if query is less than 2 characters
             }
         });
     });
@@ -430,23 +445,25 @@
         alert('Copied to clipboard!');
     }
 </script>
-                <script>
-                    var options = {
-                        chart: {
-                            type: 'line'
-                        },
-                        series: [{
-                            name: 'Posts',
-                            data: [10, 15, 12, 20, 25, 30] // Example data
-                        }],
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
-                        }
-                    };
+<script>
+    var options = {
+        chart: {
+            type: 'line'
+        },
+        series: [{
+            name: 'Posts',
+            data: [10, 15, 12, 20, 25, 30] // Example data
+        }],
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+        }
+    };
 
-                    var chart = new ApexCharts(document.querySelector("#chart"), options);
-                    chart.render();
-                </script>
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
+
+
 
 </body>
 

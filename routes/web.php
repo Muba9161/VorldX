@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BasicController;
 use App\Http\Controllers\CalenderController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FolderController;
 use App\Http\Controllers\FollowRequestController;
@@ -33,8 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/users', [ChatController::class, 'users'])->name('chat.users');
+    Route::get('/chat/{user}', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/{user}/send', [ChatController::class, 'sendMessage'])->name('chat.send');
 });
 
+Route::post('/pusher/auth', [ChatController::class, 'pusherAuth'])->middleware('auth');
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 });
@@ -82,8 +87,8 @@ Route::get('/followlist', [BasicController::class, 'followlist'])->name('followl
 
 // OrgFollowList
 
-Route::get('/orgfollow',[BasicController::class, 'orgfollow'])->name('orgfollow');
-Route::get('/following',[BasicController::class, 'following'])->name('following');
+Route::get('/orgfollow', [BasicController::class, 'orgfollow'])->name('orgfollow');
+Route::get('/following', [BasicController::class, 'following'])->name('following');
 
 // To view Profile Route
 
@@ -91,7 +96,7 @@ Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile
 
 // To follow or unfollow routes
 
-Route::get('/profile/{user}/follow',[ProfileController::class, 'follow'])->name('profile.follow');
-Route::get('/profile/{user}/unfollow',[ProfileController::class, 'unfollow'])->name('profile.unfollow');
+Route::get('/profile/{user}/follow', [ProfileController::class, 'follow'])->name('profile.follow');
+Route::get('/profile/{user}/unfollow', [ProfileController::class, 'unfollow'])->name('profile.unfollow');
 
 require __DIR__ . '/auth.php';

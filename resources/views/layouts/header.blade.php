@@ -12,6 +12,8 @@
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico') }}" />
 
@@ -34,14 +36,16 @@
     <link href="{{ asset('../assets/css/icons.css') }}" rel="stylesheet" />
 
     <!-- APEXCHARTS CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts"></link>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts">
+    </link>
     <link id="theme" rel="stylesheet" type="text/css" media="all"
         href="{{ asset('../assets/colors/color1.css') }}" />
 
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> --}}
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
@@ -128,7 +132,7 @@
                                         <!-- FULL-SCREEN -->
                                         <div class="dropdown  d-flex notifications">
                                             <a class="nav-link icon" data-bs-toggle="dropdown"><i
-                                                    class="fe fe-git-merge"></i><span class=" pulse"></span>
+                                                    class="fe fe-git-merge"></i><span class=" pulse-danger"></span>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
@@ -191,92 +195,42 @@
                                         <!-- NOTIFICATIONS -->
                                         <div class="dropdown  d-flex message">
                                             <a class="nav-link icon text-center" data-bs-toggle="dropdown">
-                                                <i class="fe fe-mail"></i><span class="pulse-danger"></span>
+                                                <i class="fe fe-mail"></i><span class="pulse"></span>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading border-bottom">
                                                     <div class="d-flex">
-                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Mailbox</h6>
-                                                        <!-- <div class="ms-auto">
-                                                            <a href="javascript:void(0)" class="text-muted p-0 fs-12">make all unread</a>
-                                                        </div> -->
+                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Chats</h6>
+                                                        <div class="ms-auto">
+                                                            <a href="#" class="text-muted p-0 fs-12">Total Messages: {{count($latestMessages)}}</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="message-menu message-menu-scroll">
-                                                    <a class="dropdown-item d-flex" href="chat.html">
-                                                        <span
-                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                            data-bs-image-src="../assets/images/users/1.jpg"></span>
-                                                        <div class="wd-90p">
-                                                            <div class="d-flex">
-                                                                <h5 class="mb-1">Peter Theil</h5>
-                                                                <small class="text-muted ms-auto text-end">
-                                                                    6:45 am
-                                                                </small>
-                                                            </div>
-                                                            <span>Commented on file Guest list....</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="chat.html">
-                                                        <span
-                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                            data-bs-image-src="../assets/images/users/15.jpg"></span>
-                                                        <div class="wd-90p">
-                                                            <div class="d-flex">
-                                                                <h5 class="mb-1">Abagael Luth</h5>
-                                                                <small class="text-muted ms-auto text-end">
-                                                                    10:35 am
-                                                                </small>
-                                                            </div>
-                                                            <span>New Meetup Started......</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="chat.html">
-                                                        <span
-                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                            data-bs-image-src="../assets/images/users/12.jpg"></span>
-                                                        <div class="wd-90p">
-                                                            <div class="d-flex">
-                                                                <h5 class="mb-1">Brizid Dawson</h5>
-                                                                <small class="text-muted ms-auto text-end">
-                                                                    2:17 pm
-                                                                </small>
-                                                            </div>
-                                                            <span>Brizid is in the Warehouse...</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="chat.html">
-                                                        <span
-                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                            data-bs-image-src="../assets/images/users/4.jpg"></span>
-                                                        <div class="wd-90p">
-                                                            <div class="d-flex">
-                                                                <h5 class="mb-1">Shannon Shaw</h5>
-                                                                <small class="text-muted ms-auto text-end">
-                                                                    7:55 pm
-                                                                </small>
-                                                            </div>
-                                                            <span>New Product Realease......</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="chat.html">
-                                                        <span
-                                                            class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                            data-bs-image-src="../assets/images/users/3.jpg"></span>
-                                                        <div class="wd-90p">
-                                                            <div class="d-flex">
-                                                                <h5 class="mb-1">Cherry Blossom</h5>
-                                                                <small class="text-muted ms-auto text-end">
-                                                                    7:55 pm
-                                                                </small>
-                                                            </div>
-                                                            <span>You have appointment on......</span>
-                                                        </div>
-                                                    </a>
+                                                    @foreach ($latestMessages as $message)
+                                                        @if ($message->sender && $message->receiver)
+                                                            <a class="dropdown-item d-flex"
+                                                                href="{{ route('chat.index', $message->sender_id === Auth::id() ? $message->receiver_id : $message->sender_id) }}">
+                                                                <span
+                                                                    class="avatar avatar-md brround me-3 align-self-center cover-image"
+                                                                    data-bs-image-src="{{ asset('storage/profile_pictures/' . ($message->sender_id === Auth::id() ? $message->receiver->profile_picture : $message->sender->profile_picture)) }}"></span>
+                                                                <div class="wd-90p">
+                                                                    <div class="d-flex">
+                                                                        <h5 class="mb-1">
+                                                                            {{ $message->sender_id === Auth::id() ? $message->receiver->name : $message->sender->name }}
+                                                                        </h5>
+                                                                        <small
+                                                                            class="text-muted ms-auto text-end">{{ $message->created_at->diffForHumans() }}</small>
+                                                                    </div>
+                                                                    <span>{{ substr($message->message, 0, 5) }}...</span>
+                                                                </div>
+                                                            </a>
+                                                        @endif
+                                                    @endforeach
 
                                                 </div>
                                                 <div class="dropdown-divider m-0"></div>
-                                                <a href="javascript:void(0)"
+                                                <a href="{{ route('chat.users') }}"
                                                     class="dropdown-item text-center p-3 text-muted">See all
                                                     Messages</a>
                                             </div>
@@ -293,9 +247,17 @@
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
                                                 @if (Auth::user())
-                                                    
-                                                <img src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}" alt="profile-user"
-                                                    class="avatar  profile-user brround cover-image" style="object-fit: cover;">
+                                                    @if (!is_null(Auth::user()->profile_picture))
+                                                        <img src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}"
+                                                            alt="profile-user"
+                                                            class="avatar  profile-user brround cover-image"
+                                                            style="object-fit: cover;">
+                                                    @else
+                                                        <img src="../assets/images/users/user.png" alt="profile-user"
+                                                            class="avatar  profile-user brround cover-image"
+                                                            style="object-fit: cover;">
+                                                    @endif
+
                                                 @endif
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
