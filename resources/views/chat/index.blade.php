@@ -178,7 +178,13 @@
                                         @else
                                             @foreach ($messages as $message)
                                                 <div class="content-inner">
-                                                    {{-- <label class="main-chat-time"><span>2 days ago</span></label> --}}
+                                                    @if ($message->created_at->isToday())
+                                                        <label
+                                                            class="main-chat-time"><span>{{ $message->created_at->diffForHumans() }}</span></label>
+                                                    @else
+                                                        <label
+                                                            class="main-chat-time"><span>{{ $message->created_at->format('d-m-Y') }}</span></label>
+                                                    @endif
                                                     @if ($message->sender_id != Auth::id())
                                                         <div class="media chat-left">
                                                             @if (!is_null($user->profile_picture))

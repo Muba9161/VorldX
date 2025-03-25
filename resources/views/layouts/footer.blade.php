@@ -82,8 +82,8 @@
     <div class="container">
         <div class="row align-items-center flex-row-reverse">
             <div class="col-md-12 col-sm-12 text-center">
-                Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed
-                with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko
+                Copyright © <span id="year"></span> <a href="javascript:void(0)"> {{env('APP_NAME')}} </a>. Designed
+                with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Muba Khan
                 </a> All rights reserved.
             </div>
         </div>
@@ -183,7 +183,6 @@
 <!-- INTERNAL Notifications js -->
 <script src="{{ asset('../assets/plugins/notify/js/jquery.growl.js') }}"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Internal Chat js-->
 <script src="{{ asset('../assets/js/chat.js') }}"></script>
@@ -195,6 +194,7 @@
 <!-- CUSTOM JS -->
 <script src="{{ asset('../assets/js/custom.js') }}"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
