@@ -86,5 +86,5 @@ class ChatController extends Controller
             ->header('Content-Type', 'application/json');
     }
 
-    
+
 }

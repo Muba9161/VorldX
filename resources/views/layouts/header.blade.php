@@ -511,7 +511,7 @@
                                         <li><a href="calendar.html" class="slide-item">Mail Manager</a></li>
                                     </ul> -->
                             </li>
-                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{{route('quick-access')}}"><i
                                     class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Quick
                                     Access</span></a>
                             <!-- <ul class="slide-menu">

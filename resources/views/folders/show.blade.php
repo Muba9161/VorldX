@@ -255,6 +255,10 @@
                                                                     class="fe fe-share me-2"></i> Share</a>
                                                             <a class="dropdown-item" href="javascript:void(0)"><i
                                                                     class="fe fe-trash me-2"></i> Dashboard</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                                onclick="addToQuickAccess({{ $subfolder->id }})">
+                                                                <i class="fe fe-star me-2"></i> Add to Quick Access
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -860,5 +864,31 @@
             </div>
         </div>
     </div>
+
+
+
+    
+    <script>
+        function addToQuickAccess(folderId) {
+            fetch('/quick-access/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        id: folderId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Optionally, update the UI after adding.
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 
 @endsection

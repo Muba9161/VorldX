@@ -270,7 +270,7 @@
             channel.bind('pusher:subscription_succeeded', function(members) {
                 // Initial online status
                 updateOnlineStatus(members.count >
-                    1); //If there is more than one member, the other user is online.
+                1); //If there is more than one member, the other user is online.
             });
 
             channel.bind('pusher:member_added', function(member) {
@@ -333,10 +333,22 @@
                             </div>
                         </div>
                     `);
+                    $('#ChatBody').scrollTop($('#ChatBody')[0].scrollHeight); // Scroll to bottom.
                 }
             });
 
             $('#sendMessage').click(function() {
+                sendMessage(); // Call the sendMessage function.
+            });
+
+            $('#messageInput').keypress(function(e) {
+                if (e.which == 13) { // 13 is the Enter key code
+                    sendMessage(); // Call the sendMessage function.
+                    e.preventDefault(); // Prevent the default form submission (if inside a form).
+                }
+            });
+
+            function sendMessage() {
                 var message = $('#messageInput').val();
 
                 $.ajax({
@@ -352,7 +364,7 @@
                         $('#messageInput').val('');
                     }
                 });
-            });
+            }
         });
     </script>
 

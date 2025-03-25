@@ -254,8 +254,10 @@
                                                                 Access</a>
                                                             <a class="dropdown-item" href="javascript:void(0)"><i
                                                                     class="fe fe-share me-2"></i> Share</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-star me-2"></i> Add to Quick Access</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                                onclick="addToQuickAccess({{ $folder->id }})">
+                                                                <i class="fe fe-star me-2"></i> Add to Quick Access
+                                                            </a>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('folders.download', ['folder' => $folder->id]) }}"><i
                                                                     class="fe fe-download me-2"></i> Download</a>

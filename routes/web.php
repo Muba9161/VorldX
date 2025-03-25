@@ -11,6 +11,7 @@ use App\Http\Controllers\FollowRequestController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuickAccessController;
 use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [ChatController::class, 'users'])->name('chat.users');
     Route::get('/chat/{user}', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/{user}/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    // Route::get('/quick-access', [QuickAccessController::class, 'index'])->name('index');
+    Route::post('/quick-access/add', [QuickAccessController::class, 'addToQuickAccess']);
+    Route::get('/quick-access', [QuickAccessController::class, 'showQuickAccessFolders'])->name('quick-access');
+    Route::post('/quick-access/remove', [QuickAccessController::class, 'removeFromQuickAccess']);
 });
 
 Route::post('/pusher/auth', [ChatController::class, 'pusherAuth'])->middleware('auth');
