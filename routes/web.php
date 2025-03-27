@@ -13,6 +13,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuickAccessController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\VaultController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -103,5 +104,24 @@ Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile
 
 Route::get('/profile/{user}/follow', [ProfileController::class, 'follow'])->name('profile.follow');
 Route::get('/profile/{user}/unfollow', [ProfileController::class, 'unfollow'])->name('profile.unfollow');
+
+
+// Vault Middleware and routes
+
+Route::middleware(['auth', 'vault.password'])->get('/vault', [VaultController::class, 'index'])->name('vaults.index');
+
+// Route::middleware(['auth', 'vault.password'])->post('/vault', [VaultController::class, 'store'])->name('vaults.index');
+// Ensure the middleware is applied on the route where the vault needs to be accessed
+// Route::middleware(['auth', 'vault.password'])->post('/vault', [VaultController::class, 'store'])->name('vaults.index');
+Route::post('/vaults/enter', [VaultController::class, 'enterVault'])->name('vaults.enter');
+Route::post('/vaults/{parentId?}', [VaultController::class, 'store'])->name('vaults.store');
+Route::get('/vaults/{vault}', [VaultController::class, 'show'])->name('vaults.show');
+Route::post('/vaults/{vault}/copy', [VaultController::class, 'copy'])->name('vaults.copy');
+Route::post('/vaults/{copiedFolderId}/paste', [VaultController::class, 'paste'])->name('vaults.paste');
+Route::get('/vaults/{vault}/download', [VaultController::class, 'download'])->name('vaults.download');
+Route::delete('/vaults/{vault}', [VaultController::class, 'destroy'])->name('vaults.destroy');
+Route::post('/login', [AuthenticatedSessionController::class, 'authenticate'])->name('login.authenticate');
+
+
 
 require __DIR__ . '/auth.php';

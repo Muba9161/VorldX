@@ -2,7 +2,7 @@
 
 @section('website-page-title', 'File Manager')
 
-@section('website-active-folders/index', 'active')
+@section('website-active-folderx    ', 'active')
 
 @section('website-main-section')
 

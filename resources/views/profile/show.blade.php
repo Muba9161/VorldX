@@ -80,6 +80,9 @@
                                                 <div class="px-0 px-sm-4">
                                                     <div class="social social-profile-buttons mt-5 float-end">
                                                         <div class="mt-3">
+                                                            <a class="social-icon text-primary" style="visibility:hidden;"
+                                                                href="{{ $user->twitter_link }}" target="_blank"><i
+                                                                    class="fab fa-arrow"></i></a>
                                                             @if (!is_null($user->facebook_link))
                                                                 <a class="social-icon text-primary"
                                                                     href="{{ $user->facebook_link }}" target="_blank"><i
@@ -100,9 +103,6 @@
                                                                     href="{{ $user->twitter_link }}" target="_blank"><i
                                                                         class="fab fa-twitter"></i></a>
                                                             @endif
-                                                            <a class="social-icon text-primary"
-                                                                href="{{ $user->twitter_link }}" target="_blank"><i
-                                                                    class="fab fa-arrow"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>

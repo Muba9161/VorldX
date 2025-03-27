@@ -329,14 +329,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
         return $.growl($.extend(settings, options));
     };
+    $.growl.error2 = function() {
+        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        var settings;
+        settings = {
+            title: "Authentication Failed! Check Your Details...",
+            style: "error1"
+        };
+        return $.growl($.extend(settings, options));
+    };
 
     $.growl.notice1 = function() {
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
         var settings;
         settings = {
-            title: "Notice!",
+            title: "Login Sucessfull!",
             style: "notice1"
+        };
+        return $.growl($.extend(settings, options));
+    };
+    $.growl.notice2 = function() {
+        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        var settings;
+        settings = {
+            title: "Authentication Sucessfull!",
+            style: "notice2"
         };
         return $.growl($.extend(settings, options));
     };

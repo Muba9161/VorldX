@@ -35,13 +35,11 @@
     <!--- FONT-ICONS CSS -->
     <link href="{{ asset('../assets/css/icons.css') }}" rel="stylesheet" />
 
-    <!-- APEXCHARTS CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts">
-    </link>
     <link id="theme" rel="stylesheet" type="text/css" media="all"
         href="{{ asset('../assets/colors/color1.css') }}" />
+    <!-- Add Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> --}}
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -53,7 +51,6 @@
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
-
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
         <img src="{{ asset('assets/images/loader.svg') }}" class="loader-img" alt="Loader">
@@ -118,7 +115,7 @@
                                             <a class="nav-link icon text-center" href="{{ route('followlist') }}"
                                                 target="_blank" data-bs-toggle="tooltip"
                                                 data-bs-original-title="Connect Around">
-                                                <i class="fe fe-globe"></i><span
+                                                <i class="fe fe-radio   "></i><span
                                                     class="fs-16 ms-2 d-none d-xl-block"></span>
                                             </a>
                                         </div>
@@ -202,7 +199,8 @@
                                                     <div class="d-flex">
                                                         <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Chats</h6>
                                                         <div class="ms-auto">
-                                                            <a href="#" class="text-muted p-0 fs-12">Total Messages: {{count($latestMessages)}}</a>
+                                                            <a href="#" class="text-muted p-0 fs-12">Total
+                                                                Messages: {{ count($latestMessages) }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -346,7 +344,7 @@
                             <li class="slide">
                                 <a href = "{{ route('profile.index') }}" class="side-menu__item"
                                     data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">View
+                                        class="side-menu__icon fe fe-user"></i><span class="side-menu__label">View
                                         Profile</span></a>
                                 <!-- <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
@@ -373,7 +371,8 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">View
+                                        class="side-menu__icon fe fe-clipboard"></i><span
+                                        class="side-menu__label">View
                                         Resume</span></a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
@@ -414,59 +413,8 @@
                                             </ul> -->
                             </li>
                             <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                    class="side-menu__icon fe fe-lock"></i><span
-                                    class="side-menu__label">Vault</span></a>
-                            <ul class="slide-menu mega-slide-menu">
-                                <li class="side-menu-label1"><a href="javascript:void(0)">Bootstrap</a></li>
-                                <div class="mega-menu">
-                                    <div class="">
-                                        <ul>
-                                            <li><a href="alerts.html" class="slide-item"> Alerts</a></li>
-                                            <li><a href="buttons.html" class="slide-item"> Buttons</a></li>
-                                            <li><a href="colors.html" class="slide-item"> Colors</a></li>
-                                            <li><a href="avatarsquare.html" class="slide-item"> Avatar Square</a></li>
-                                            <li><a href="avatar-radius.html" class="slide-item"> Avatar Radius</a>
-                                            </li>
-                                            <li><a href="avatar-round.html" class="slide-item"> Avatar Rounded</a>
-                                            </li>
-                                            <li><a href="dropdown.html" class="slide-item"> Dropdowns</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="">
-                                        <ul>
-                                            <li><a href="listgroup.html" class="slide-item"> List Group</a></li>
-                                            <li><a href="tags.html" class="slide-item"> Tags</a></li>
-                                            <li><a href="pagination.html" class="slide-item"> Pagination</a></li>
-                                            <li><a href="navigation.html" class="slide-item"> Navigation</a></li>
-                                            <li><a href="typography.html" class="slide-item"> Typography</a></li>
-                                            <li><a href="breadcrumbs.html" class="slide-item"> Breadcrumbs</a></li>
-                                            <li><a href="badge.html" class="slide-item"> Badges / Pills</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="">
-                                        <ul>
-                                            <li><a href="panels.html" class="slide-item"> Panels</a></li>
-                                            <li><a href="thumbnails.html" class="slide-item"> Thumbnails</a></li>
-                                            <li><a href="offcanvas.html" class="slide-item"> Offcanvas</a></li>
-                                            <li><a href="toast.html" class="slide-item"> toast</a></li>
-                                            <li><a href="scrollspy.html" class="slide-item"> Scrollspy</a></li>
-                                            <li><a href="mediaobject.html" class="slide-item"> Media Object</a></li>
-                                            <li><a href="accordion.html" class="slide-item"> Accordions </a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="">
-                                        <ul>
-                                            <li><a href="tabs.html" class="slide-item"> Tabs</a></li>
-                                            <li><a href="modal.html" class="slide-item"> Modal</a></li>
-                                            <li><a href="tooltipandpopover.html" class="slide-item"> Tooltip and
-                                                    popover</a></li>
-                                            <li><a href="progress.html" class="slide-item"> Progress</a></li>
-                                            <li><a href="carousel.html" class="slide-item"> Carousels</a></li>
-                                            <li><a href="ribbons.html" class="slide-item"> Ribbons</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </ul>
+                                    class="side-menu__icon fe fe-lock"></i><span class="side-menu__label"
+                                    data-bs-target="#vault" data-bs-toggle="modal">Vault</span></a>
                             </li>
                             <!-- <li>
                                 <a class="side-menu__item has-link" href="landing-page.html" target="_blank"><i
@@ -483,7 +431,7 @@
                             <li class="slide">
                             <li class="slide">
                                 <a href="{{ route('entity.index') }}" class="side-menu__item" data-bs-toggle="slide"
-                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-slack"></i><span
+                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-briefcase"></i><span
                                         class="side-menu__label">Entity Manager</span></a>
                                 <!-- <ul class="slide-menu">
                                         <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
@@ -511,8 +459,9 @@
                                         <li><a href="calendar.html" class="slide-item">Mail Manager</a></li>
                                     </ul> -->
                             </li>
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{{route('quick-access')}}"><i
-                                    class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Quick
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('quick-access') }}"><i
+                                    class="side-menu__icon fe fe-fast-forward"></i><span
+                                    class="side-menu__label">Quick
                                     Access</span></a>
                             <!-- <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Apps</a></li>
@@ -564,15 +513,10 @@
                                 </ul> --}}
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fe fe-user"></i><span class="side-menu__label">AI
+                                <a class="side-menu__item" data-bs-target="#ai-selector" data-bs-toggle="modal"
+                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-cpu"></i><span
+                                        class="side-menu__label">AI
                                         Agents</span></a>
-                                <ul class="slide-menu">
-                                    <!-- <li class="side-menu-label1"><a href="javascript:void(0)">Pages</a></li> -->
-                                    <a href="https://chatgpt.com" target="_blank" class="slide-item">ChatGPT</a>
-                                    <a href="https://grok.com/?referrer=website" target="_blank"
-                                        class="slide-item">Grok 3</a>
-                                </ul>
                             </li>
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg"
@@ -582,4 +526,101 @@
                     </div>
                 </div>
                 <!--/APP-SIDEBAR-->
+            </div>
+
+
+            {{-- Modal for Vault Password Authentication --}}
+            <div class="modal fade" id="vault">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content country-select-modal">
+                        <div class="modal-header">
+                            {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
+                        </div>
+                        <div class="modal-body">
+                            <!-- Folder Creation Form -->
+                            <h2>Vault Authentication</h2>
+                            <form method="POST" action="{{ route('vaults.enter') }}">
+                                @csrf
+                                <div class="row mb-4">
+                                    <label for="inputPassword3" class="col-md-3 form-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="inputPassword3"
+                                            name="vault_password" placeholder="Password" required>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-md-9">
+                                        <button class="btn btn-primary">Enter Vault</button>
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {{-- Modal for  creation --}}
+            <div class="modal fade" id="createfolder">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content country-select-modal">
+                        <div class="modal-header">
+                            {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
+                        </div>
+                        <div class="modal-body">
+                            <!-- Folder Creation Form -->
+                            <h2>Create Folder</h2>
+                            <form action="{{ route('folders.store', $folder->parent_id ?? null) }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label">Folder Name</label>
+                                    <input type="text" name="name" class="form-control" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button"
+                                    data-bs-target="#option-selector" data-bs-toggle="modal">Cancel</button>
+                            </form>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="ai-selector">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content country-select-modal">
+                        <div class="modal-header">
+                            <h6 class="modal-title">Choose AI</h6><button aria-label="Close" class="btn-close"
+                                data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="row p-3">
+                                <li class="col-lg-6 mb-2">
+                                    <a href="https://chatgpt.com/" target="_blank"
+                                        class="btn btn-country btn-lg btn-block active">
+                                        <span class="country-selector"><i
+                                                class="fe fe-shield me-3 language"></i></span>ChatGPT</a>
+
+                                </li>
+                                <li class="col-lg-6 mb-2">
+                                    <a href="https://grok.com/?referrer=website" target="_blank"
+                                        class="btn btn-country btn-lg btn-block active">
+                                        <span class="country-selector"><i
+                                                class="fe fe-link me-3 language"></i></span>Grok 3</a>
+                                </li>
+                                <li class="col-lg-6 mb-2">
+                                    <a href="https://gemini.google.com/app?hl=en-IN" target="_blank"
+                                        class="btn btn-country btn-lg btn-block active">
+                                        <span class="country-selector"><i
+                                                class="fe fe-cloud me-3 language"></i></span>Gemini</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>

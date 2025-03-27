@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('website-page-title', 'File Manager')
+@section('website-page-title', 'Vault Manager')
 
-@section('website-active-folders/folder-item', 'active')
+@section('website-active-Vaults', 'active')
 
 @section('website-main-section') <!--app-content open-->
 
@@ -29,7 +29,7 @@
                                     d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
                             </svg></span>
                         <h4 class="h4 mb-0 mt-3">Success</h4>
-                        <p class="card-text">Folder deleted successfully</p>
+                        <p class="card-text">Vault deleted successfully</p>
                     </div>
                     <div class="card-footer text-center border-0 pt-0">
                         <div class="row">
@@ -62,9 +62,9 @@
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block"
-                                    data-bs-target="#createfolder" data-bs-toggle="modal">
-                                    <span class="country-selector"><i class="fa fa-folder me-3 language"
-                                            style="color: #6c5ffc;"></i></span>Folder
+                                    data-bs-target="#createvault" data-bs-toggle="modal">
+                                    <span class="country-selector"><i class="fa fa-vault me-3 language"
+                                            style="color: #6c5ffc;"></i></span>vault
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
@@ -99,7 +99,7 @@
                                 <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
                             </svg></span>
                         <h4 class="h4 mb-0 mt-3">Warning</h4>
-                        <p class="card-text" id="deleteMessage">Are you sure you want to delete this folder?
+                        <p class="card-text" id="deleteMessage">Are you sure you want to delete this Vault?
                         </p>
                     </div>
                     <div class="card-footer text-center border-0 pt-0">
@@ -121,19 +121,19 @@
 
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
-                    <h1 class="page-title">{{ $folder->name }}</h1>
+                    <h1 class="page-title">{{ $vault->name }}</h1>
                     <div>
                         <ol class="breadcrumb1 bg-success">
                             <li class="breadcrumb-item">
                                 <i class="fa fa-chevron-right me-2 text-white" aria-hidden="true"></i>
-                                <a class="text-white" href="{{ route('folders.index') }}">File Manager</a>
+                                <a class="text-white" href="{{ route('vaults.index') }}">File Manager</a>
                             </li>
 
-                            @foreach ($breadcrumb as $folder)
+                            @foreach ($breadcrumb as $vault)
                                 <li class="breadcrumb-item">
                                     <i class="fa fa-chevron-right me-2 text-white" aria-hidden="true"></i>
                                     <a class="text-white"
-                                        href="{{ route('folders.show', $folder->id) }}">{{ $folder->name }}</a>
+                                        href="{{ route('vaults.show', $vault->id) }}">{{ $vault->name }}</a>
                                 </li>
                             @endforeach
                         </ol>
@@ -157,7 +157,7 @@
                                 </button>
                             </div>
                             <div class="card-body">
-                                @foreach ($breadcrumb as $folder)
+                                @foreach ($breadcrumb as $vault)
                                     <div class="col-lg-8 mt-8 mt-lg-0">
                                         <ul id="tree2">
                                             <li><a href="javascript:void(0)">File Manager</a>
@@ -183,22 +183,22 @@
                     </div>
                     <div class="col-md-7 col-lg-7 col-xl-9">
                         <div class="row row-sm">
-                            <div class="text-dark mb-2 ms-1 fs-20 fw-semibold">All Folders</div>
-                            @if ($subfolders->isEmpty())
+                            <div class="text-dark mb-2 ms-1 fs-20 fw-semibold">All vaults</div>
+                            @if ($subvaults->isEmpty())
                                 <div class="col-12">
                                     <div class="card pos-relative">
                                         <div class="card-body text-center">
-                                            <h5>No Folder to show</h5>
+                                            <h5>No vault to show</h5>
                                         </div>
                                     </div>
                                 </div>
                             @else
-                                @foreach ($subfolders as $subfolder)
+                                @foreach ($subvaults as $subvault)
                                     <div class="col-xl-4 col-md-6 col-sm-6">
                                         <div class="card pos-relative">
                                             {{-- <a href="filemanager-list.html" class="open-file"></a> --}}
-                                            {{-- <a href="{{ route('folders.show', $folder->id) }}"> --}}
-                                            {{-- <h5 class="text-warning">{{ $folder->name }}</h5> --}}
+                                            {{-- <a href="{{ route('vaults.show', $vault->id) }}"> --}}
+                                            {{-- <h5 class="text-warning">{{ $vault->name }}</h5> --}}
                                             </a>
                                             <div class="card-body px-4 pt-4 pb-2">
                                                 <div class="d-flex">
@@ -218,8 +218,8 @@
                                                                     class="fe fe-user me-2"></i> Profile</a>
                                                             <!-- Copy Link -->
                                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                                id="copy-folder-link"
-                                                                data-folder-id="{{ $subfolder->id }}">
+                                                                id="copy-vault-link"
+                                                                data-vault-id="{{ $subvault->id }}">
                                                                 <i class="fe fe-copy me-2"></i> Copy
                                                             </a>
 
@@ -228,7 +228,7 @@
                                                             <a class="dropdown-item" href="javascript:void(0)"><i
                                                                     class="fe fe-move me-2"></i> Move</a>
 
-                                                            <button onclick="openDeleteModal({{ $subfolder->id }})"
+                                                            <button onclick="openDeleteModal({{ $subvault->id }})"
                                                                 class="dropdown-item">
                                                                 <i class="fe fe-trash me-2"></i> Delete
                                                             </button>
@@ -256,7 +256,7 @@
                                                             <a class="dropdown-item" href="javascript:void(0)"><i
                                                                     class="fe fe-trash me-2"></i> Dashboard</a>
                                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                                onclick="addToQuickAccess({{ $subfolder->id }})">
+                                                                onclick="addToQuickAccess({{ $subvault->id }})">
                                                                 <i class="fe fe-star me-2"></i> Add to Quick Access
                                                             </a>
                                                         </div>
@@ -267,8 +267,8 @@
                                             <div class="card-footer border-top-0">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <a href="{{ route('folders.show', $subfolder->id) }}">
-                                                            <h5 class="text-warning">{{ $subfolder->name }}</h5>
+                                                        <a href="{{ route('vaults.show', $subvault->id) }}">
+                                                            <h5 class="text-warning">{{ $subvault->name }}</h5>
                                                         </a>
                                                     </div>
                                                     <div class="ms-auto mt-4">
@@ -791,9 +791,9 @@
                     {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
                 </div>
                 <div class="modal-body">
-                    <!-- Folder Creation Form -->
+                    <!-- vault Creation Form -->
                     <h2>Create Space</h2>
-                    <form action="{{ route('folders.store', $folder->id ?? null) }}" method="POST">
+                    <form action="{{ route('vaults.store', $vault->id ?? null) }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Space Name</label>
@@ -810,20 +810,20 @@
         </div>
     </div>
 
-    {{-- Modal for Folder creation --}}
-    <div class="modal fade" id="createfolder">
+    {{-- Modal for vault creation --}}
+    <div class="modal fade" id="createvault">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content country-select-modal">
                 <div class="modal-header">
                     {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
                 </div>
                 <div class="modal-body">
-                    <!-- Folder Creation Form -->
-                    <h2>Create Folder</h2>
-                    <form action="{{ route('folders.store', $folder->id ?? null) }}" method="POST">
+                    <!-- vault Creation Form -->
+                    <h2>Create vault</h2>
+                    <form action="{{ route('vaults.store', $vault->id ?? null) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Folder Name</label>
+                            <label class="form-label">vault Name</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
 
@@ -846,12 +846,12 @@
                     {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
                 </div>
                 <div class="modal-body">
-                    <!-- Folder Creation Form -->
+                    <!-- vault Creation Form -->
                     <h2>Upload a File</h2>
-                    <form action="{{ route('folders.store', $folder->id ?? null) }}" method="POST">
+                    <form action="{{ route('vaults.store', $vault->id ?? null) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Folder Name</label>
+                            <label class="form-label">vault Name</label>
                             <input type="file" name="filename" class="form-control" required>
                         </div>
 
@@ -867,9 +867,9 @@
 
 
 
-    
+
     <script>
-        function addToQuickAccess(folderId) {
+        function addToQuickAccess(vaultId) {
             fetch('/quick-access/add', {
                     method: 'POST',
                     headers: {
@@ -877,7 +877,7 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     body: JSON.stringify({
-                        id: folderId
+                        id: vaultId
                     })
                 })
                 .then(response => response.json())

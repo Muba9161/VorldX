@@ -30,6 +30,8 @@ class AuthenticatedSessionController extends Controller
             // Regenerate the session ID to prevent session fixation
             $request->session()->regenerate();
 
+            session()->flash('status', 'success');
+
             // Redirect to dashboard or desired location
             return redirect()->route('dashboard');
         }
@@ -38,6 +40,8 @@ class AuthenticatedSessionController extends Controller
         throw ValidationException::withMessages([
             'email' => 'The provided credentials do not match our records.',
         ]);
+
+
     }
 
 

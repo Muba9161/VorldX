@@ -35,7 +35,8 @@
                                             <div class="row">
                                                 <div class="panel profile-cover">
                                                     <div class="profile-cover__action bg-img">
-                                                        <img src="{{ asset('storage/banner_images/' . $user->banner_image) }}" alt="">
+                                                        <img src="{{ asset('storage/banner_images/' . $user->banner_image) }}"
+                                                            alt="">
                                                     </div>
                                                     <div class="profile-cover__img">
                                                         <div class="profile-img-1">
@@ -66,6 +67,9 @@
                                                 <div class="px-0 px-sm-4">
                                                     <div class="social social-profile-buttons mt-5 float-end">
                                                         <div class="mt-3">
+                                                            <a class="social-icon text-primary" style="visibility:hidden;"
+                                                                href="{{ $user->twitter_link }}" target="_blank"><i
+                                                                    class="fab fa-arrow"></i></a>
                                                             @if (!is_null($user->facebook_link))
                                                                 <a class="social-icon text-primary"
                                                                     href="{{ $user->facebook_link }}" target="_blank"><i
@@ -86,9 +90,6 @@
                                                                     href="{{ $user->twitter_link }}" target="_blank"><i
                                                                         class="fab fa-twitter"></i></a>
                                                             @endif
-                                                            <a class="social-icon text-primary"
-                                                                href="{{ $user->twitter_link }}" target="_blank"><i
-                                                                    class="fab fa-arrow"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -541,54 +542,21 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="">
-                                            <div class="media overflow-visible">
-                                                <img class="avatar brround avatar-md me-3"
-                                                    src="../assets/images/users/18.jpg" alt="avatar-img">
-                                                <div class="media-body valign-middle mt-2">
-                                                    <a href="javascript:void(0)" class=" fw-semibold text-dark">John
-                                                        Paige</a>
-                                                    <p class="text-muted mb-0">johan@gmail.com</p>
+                                            @foreach ($following as $list)
+                                                <div class="media overflow-visible mt-sm-5">
+                                                    <span
+                                                        class="avatar cover-image avatar-md brround bg-pink me-3">UK</span>
+                                                    <div class="media-body valign-middle mt-2">
+                                                        <a href="javascript:void(0)" class="fw-semibold text-dark">{{$list->name}}</a>
+                                                        <p class="text-muted mb-0">{{$list->email}}</p>
+                                                    </div>
+                                                    <div class="media-body valign-middle text-end overflow-visible mt-1">
+                                                        <button class="btn btn-sm btn-secondary"
+                                                            type="button">Follow</button>
+                                                    </div>
                                                 </div>
-                                                <div class="media-body valign-middle text-end overflow-visible mt-2">
-                                                    <button class="btn btn-sm btn-primary" type="button">Follow</button>
-                                                </div>
-                                            </div>
-                                            <div class="media overflow-visible mt-sm-5">
-                                                <span class="avatar cover-image avatar-md brround bg-pink me-3">LQ</span>
-                                                <div class="media-body valign-middle mt-2">
-                                                    <a href="javascript:void(0)" class="fw-semibold text-dark">Lillian
-                                                        Quinn</a>
-                                                    <p class="text-muted mb-0">lilliangore</p>
-                                                </div>
-                                                <div class="media-body valign-middle text-end overflow-visible mt-1">
-                                                    <button class="btn btn-sm btn-secondary"
-                                                        type="button">Follow</button>
-                                                </div>
-                                            </div>
-                                            <div class="media overflow-visible mt-sm-5">
-                                                <img class="avatar brround avatar-md me-3"
-                                                    src="../assets/images/users/2.jpg" alt="avatar-img">
-                                                <div class="media-body valign-middle mt-2">
-                                                    <a href="javascript:void(0)" class="text-dark fw-semibold">Harry
-                                                        Fisher</a>
-                                                    <p class="text-muted mb-0">harryuqt</p>
-                                                </div>
-                                                <div class="media-body valign-middle text-end overflow-visible mt-1">
-                                                    <button class="btn btn-sm btn-danger" type="button">Follow</button>
-                                                </div>
-                                            </div>
-                                            <div class="media overflow-visible mt-sm-5">
-                                                <span
-                                                    class="avatar cover-image avatar-md brround me-3 bg-primary">IH</span>
-                                                <div class="media-body valign-middle mt-2">
-                                                    <a href="javascript:void(0)" class="fw-semibold text-dark">Irene
-                                                        Harris</a>
-                                                    <p class="text-muted mb-0">harris@gmail.com</p>
-                                                </div>
-                                                <div class="media-body valign-middle text-end overflow-visible mt-1">
-                                                    <button class="btn btn-sm btn-success" type="button">Follow</button>
-                                                </div>
-                                            </div>
+                                            @endforeach
+
                                         </div>
                                     </div>
                                 </div>

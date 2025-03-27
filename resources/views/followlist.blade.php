@@ -24,8 +24,61 @@
                 </div>
                 <!-- PAGE-HEADER END -->
 
+
+                <div class="row row-cols-4">
+                    @if ($followlistorg->isEmpty())
+                        <div class="col-md-12 text-center">
+                            <p>No One to Connect!</p>
+                        </div>
+                    @endif
+                    @foreach ($followlistorg as $follow)
+                        <div class="col-xl-3 col-sm-6 col-md-6">
+                            <div class="card border p-0">
+                                <div class="card-header">
+                                    <h3 class="card-title">Howdy!</h3>
+                                    <div class="card-options">
+                                        <a href="javascript:void(0)" class="card-options-collapse"
+                                            data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                                        <a href="javascript:void(0)" class="card-options-remove"
+                                            data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="card-body text-center">
+                                    @if ($follow->profile_picture)
+                                        <span class="avatar avatar-xxl brround cover-image"
+                                            data-bs-image-src="{{ asset('storage/profile_pictures/' . $follow->profile_picture) }}"
+                                            style="background: url(&quot;../assets/images/users/15.jpg&quot;) center center;"></span>
+                                    @else
+                                        <span class="avatar avatar-xxl brround cover-image"
+                                            data-bs-image-src="../assets/images/users/user.jpg"
+                                            style="background: url(&quot;../assets/images/users/15.jpg&quot;) center center;"></span>
+                                    @endif
+                                    <h4 class="h4 mb-0 mt-3">{{ $follow->name }}
+                                    </h4>
+                                    <p class="card-text" style="text-transform: capitalize;">
+                                        {{ $follow->option }}</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <div class="row user-social-detail">
+                                        <div class="social-profile me-4 rounded text-center">
+                                            <a href="{{ route('chat.index', $follow->id) }}"><i
+                                                    class="fa fa-paper-plane"></i></a>
+                                        </div>
+                                        <div class="social-profile me-4 rounded text-center">
+                                            <a href="{{ route('profile.show', $follow->id) }}"><i class="fa fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+
                 <!-- ROW OPEN -->
-                <div class="row">
+                {{-- <div class="row row-cols-4">
                     <div class="col-12 col-sm-12">
                         <div class="card">
                             <div class="card-header">
@@ -43,7 +96,8 @@
                                                                 data-bs-toggle="tab">Entities</a></li>
                                                         <li><a href="#tab6" data-bs-toggle="tab"
                                                                 class="text-dark">Individuals</a></li>
-                                                        <li><a href="#tab7" data-bs-toggle="tab" class="text-dark">All</a>
+                                                        <li><a href="#tab7" data-bs-toggle="tab"
+                                                                class="text-dark">All</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -51,265 +105,157 @@
                                             <div class="panel-body tabs-menu-body border-0 pt-0">
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="tab5">
-                                                        <div class="table-responsive">
-                                                            <table id="data-table"
-                                                                class="table table-bordered text-nowrap mb-0">
-                                                                <thead class="border-top">
-                                                                    <tr>
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 2%;">Sr No.
-                                                                        </th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Name</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Type</th>
-                                                                        {{-- <th class="bg-transparent border-bottom-0">
-                                                                            Date</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Amount</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Payment Mode</th>
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 10%;">Status</th> --}}
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 5%;">Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                @foreach ($followlistorg as $follow)
-                                                                    @if ($follow->option == 'entity')
-                                                                        <tbody>
-                                                                            <tr class="border-bottom">
-                                                                                <td class="text-center">
-                                                                                    <div class="mt-0 mt-sm-2 d-block">
-                                                                                        {{-- @foreach ($totalcount as $count)
-                                                                                    @for ($i = 1; $i <= $count; $i++)
-                                                                                    @endfor
-                                                                                    @endforeach --}}
-                                                                                        <h6 class="mb-0 fs-14 fw-semibold">
-                                                                                            {{ $follow->id }}
-                                                                                        </h6>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="d-flex">
-                                                                                        <span class="avatar bradius">
-                                                                                            <i class="fas fa-building"></i>
-                                                                                        </span>
-                                                                                        <div
-                                                                                            class="ms-3 mt-0 mt-sm-2 d-block">
-                                                                                            <h6
-                                                                                                class="mb-0 fs-14 fw-semibold">
-                                                                                                {{ $follow->name }}</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="d-flex">
-                                                                                        <div class="mt-0 mt-sm-3 d-block">
-                                                                                            <h6 class="mb-0 fs-14 fw-semibold"
-                                                                                                style="text-transform: capitalize;">
-                                                                                                {{ $follow->option }}</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="g-2">
-                                                                                        {{-- <a class="btn text-primary btn-xl"
-                                                                                            data-bs-toggle="tooltip"
-                                                                                            data-bs-original-title="Follow"><span
-                                                                                                class="fe fe-user-plus fs-14"></span></a> --}}
+                                                        @foreach ($followlistorg as $follow)
+                                                            @if ($follow->option == 'entity')
+                                                                <div class="col-xl-3 col-sm-6 col-md-6">
+                                                                    <div class="card border p-0">
+                                                                        <div class="card-header">
+                                                                            <h3 class="card-title">Contact card</h3>
+                                                                            <div class="card-options">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="card-options-collapse"
+                                                                                    data-bs-toggle="card-collapse"><i
+                                                                                        class="fe fe-chevron-up"></i></a>
+                                                                                <a href="javascript:void(0)"
+                                                                            class="card-options-remove"
+                                                                            data-bs-toggle="card-remove"><i
+                                                                                class="fe fe-x"></i></a>
+                                                                            </div>
+                                                                        </div>
 
-                                                                                        <a class="btn text-primary btn-sm"
-                                                                                            data-bs-toggle="tooltip"
-                                                                                            data-bs-original-title="View Profile"
-                                                                                            href="{{ route('profile.show', $follow->id) }}"
-                                                                                            target="_blank"><span
-                                                                                                class="fe fe-eye fs-14"></span></a>
+                                                                        <div class="card-body text-center">
+                                                                            <span
+                                                                                class="avatar avatar-xxl brround cover-image"
+                                                                                data-bs-image-src="../assets/images/users/15.jpg"
+                                                                                style="background: url(&quot;../assets/images/users/15.jpg&quot;) center center;"></span>
+                                                                            <h4 class="h4 mb-0 mt-3">{{ $follow->name }}
+                                                                            </h4>
+                                                                            <p class="card-text"
+                                                                                style="text-transform: capitalize;">
+                                                                                {{ $follow->option }}</p>
+                                                                        </div>
+                                                                        <div class="card-footer text-center">
+                                                                            <div class="row user-social-detail">
+                                                                                <div
+                                                                                    class="social-profile me-4 rounded text-center">
+                                                                                    <a href="javascript:void(0)"><i
+                                                                                            class="fa fa-paper-plane"></i></a>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="social-profile me-4 rounded text-center">
+                                                                                    <a
+                                                                                        href="{{ route('profile.show', $follow->id) }}"><i
+                                                                                            class="fa fa-eye"></i></a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    @endif
-                                                                @endforeach
-                                                            </table>
-                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
                                                     </div>
 
                                                     <div class="tab-pane" id="tab6">
-                                                        <div class="table-responsive">
-                                                            <table id="data-table"
-                                                                class="table table-bordered text-nowrap mb-0">
-                                                                <thead class="border-top">
-                                                                    <tr>
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 2%;">Sr No.
-                                                                        </th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Name</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Type</th>
-                                                                        {{-- <th class="bg-transparent border-bottom-0">
-                                                                            Date</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Amount</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Payment Mode</th>
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 10%;">Status</th> --}}
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 5%;">Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                @foreach ($followlistorg as $follow)
-                                                                    @if ($follow->option == 'individual')
-                                                                        <tbody>
-                                                                            <tr class="border-bottom">
-                                                                                <td class="text-center">
-                                                                                    <div class="mt-0 mt-sm-2 d-block">
-                                                                                        {{-- @foreach ($totalcount as $count)
-                                                                                    @for ($i = 1; $i <= $count; $i++)
-                                                                                    @endfor
-                                                                                    @endforeach --}}
-                                                                                        <h6 class="mb-0 fs-14 fw-semibold">
-                                                                                            {{ $follow->id }}
-                                                                                        </h6>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="d-flex">
-                                                                                        <span class="avatar bradius">
-                                                                                            <i class="fas fa-building"></i>
-                                                                                        </span>
-                                                                                        <div
-                                                                                            class="ms-3 mt-0 mt-sm-2 d-block">
-                                                                                            <h6
-                                                                                                class="mb-0 fs-14 fw-semibold">
-                                                                                                {{ $follow->name }}</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="d-flex">
-                                                                                        <div class="mt-0 mt-sm-3 d-block">
-                                                                                            <h6 class="mb-0 fs-14 fw-semibold"
-                                                                                                style="text-transform: capitalize;">
-                                                                                                {{ $follow->option }}</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="g-2">
-                                                                                        {{-- <a class="btn text-primary btn-xl"
-                                                                                            data-bs-toggle="tooltip"
-                                                                                            data-bs-original-title="Follow"><span
-                                                                                                class="fe fe-user-plus fs-14"></span></a> --}}
+                                                        @foreach ($followlistorg as $follow)
+                                                            @if ($follow->option == 'individual')
+                                                                <div class="col-xl-3 col-sm-6 col-md-6">
+                                                                    <div class="card border p-0">
+                                                                        <div class="card-header">
+                                                                            <h3 class="card-title">Contact card</h3>
+                                                                            <div class="card-options">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="card-options-collapse"
+                                                                                    data-bs-toggle="card-collapse"><i
+                                                                                        class="fe fe-chevron-up"></i></a>
+                                                                                <a href="javascript:void(0)"
+                                                                            class="card-options-remove"
+                                                                            data-bs-toggle="card-remove"><i
+                                                                                class="fe fe-x"></i></a>
+                                                                            </div>
+                                                                        </div>
 
-                                                                                        <a class="btn text-primary btn-sm"
-                                                                                            data-bs-toggle="tooltip"
-                                                                                            data-bs-original-title="View Profile"
-                                                                                            href="{{ route('profile.show', $follow->id) }}"
-                                                                                            target="_blank"><span
-                                                                                                class="fe fe-eye fs-14"></span></a>
+                                                                        <div class="card-body text-center">
+                                                                            <span
+                                                                                class="avatar avatar-xxl brround cover-image"
+                                                                                data-bs-image-src="../assets/images/users/15.jpg"
+                                                                                style="background: url(&quot;../assets/images/users/15.jpg&quot;) center center;"></span>
+                                                                            <h4 class="h4 mb-0 mt-3">{{ $follow->name }}
+                                                                            </h4>
+                                                                            <p class="card-text"
+                                                                                style="text-transform: capitalize;">
+                                                                                {{ $follow->option }}</p>
+                                                                        </div>
+                                                                        <div class="card-footer text-center">
+                                                                            <div class="row user-social-detail">
+                                                                                <div
+                                                                                    class="social-profile me-4 rounded text-center">
+                                                                                    <a href="javascript:void(0)"><i
+                                                                                            class="fa fa-paper-plane"></i></a>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="social-profile me-4 rounded text-center">
+                                                                                    <a
+                                                                                        href="{{ route('profile.show', $follow->id) }}"><i
+                                                                                            class="fa fa-eye"></i></a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    @endif
-                                                                @endforeach
-                                                            </table>
-                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
                                                     </div>
 
 
                                                     <div class="tab-pane" id="tab7">
-                                                        <div class="table-responsive">
-                                                            <table id="data-table"
-                                                                class="table table-bordered text-nowrap mb-0">
-                                                                <thead class="border-top">
-                                                                    <tr>
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 2%;">Sr No.
-                                                                        </th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Name</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Type</th>
-                                                                        {{-- <th class="bg-transparent border-bottom-0">
-                                                                            Date</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Amount</th>
-                                                                        <th class="bg-transparent border-bottom-0">
-                                                                            Payment Mode</th>
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 10%;">Status</th> --}}
-                                                                        <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 5%;">Action</th>
-                                                                    </tr>
-                                                                </thead>
+                                                        @foreach ($followlistorg as $follow)
+                                                            <div class="col-xl-3 col-sm-6 col-md-6">
+                                                                <div class="card border p-0">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title">Contact card</h3>
+                                                                        <div class="card-options">
+                                                                            <a href="javascript:void(0)"
+                                                                                class="card-options-collapse"
+                                                                                data-bs-toggle="card-collapse"><i
+                                                                                    class="fe fe-chevron-up"></i></a>
+                                                                            <a href="javascript:void(0)"
+                                                                            class="card-options-remove"
+                                                                            data-bs-toggle="card-remove"><i
+                                                                                class="fe fe-x"></i></a>
+                                                                        </div>
+                                                                    </div>
 
-                                                                @foreach ($followlistorg as $follow)
-                                                                    <tbody>
-                                                                        <tr class="border-bottom">
-                                                                            <td class="text-center">
-                                                                                <div class="mt-0 mt-sm-2 d-block">
-                                                                                    {{-- @foreach ($totalcount as $count)
-                                                                                        @for ($i = 1; $i <= $count; $i++)
-                                                                                        @endfor
-                                                                                        @endforeach --}}
-                                                                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                                                                        {{ $follow->id }}
-                                                                                    </h6>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="d-flex">
-                                                                                    @if ($follow->option == 'individual')
-                                                                                        <span class="avatar bradius">
-                                                                                            <i class="fe fe-user"></i>
-                                                                                        </span>
-                                                                                    @else
-                                                                                        <span class="avatar bradius">
-                                                                                            <i class="fas fa-building"></i>
-                                                                                        </span>
-                                                                                    @endif
-                                                                                    <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                                                                        <h6 class="mb-0 fs-14 fw-semibold">
-                                                                                            {{ $follow->name }}</h6>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="d-flex">
-                                                                                    <div class="mt-0 mt-sm-3 d-block">
-                                                                                        <h6 class="mb-0 fs-14 fw-semibold"
-                                                                                            style="text-transform: capitalize;">
-                                                                                            {{ $follow->option }}</h6>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="g-2">
-                                                                                    {{-- <a class="btn text-primary btn-xl"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-original-title="Follow"><span
-                                                                                            class="fe fe-user-plus fs-14"></span></a> --}}
+                                                                    <div class="card-body text-center">
+                                                                        <span class="avatar avatar-xxl brround cover-image"
+                                                                            data-bs-image-src="../assets/images/users/15.jpg"
+                                                                            style="background: url(&quot;../assets/images/users/15.jpg&quot;) center center;"></span>
+                                                                        <h4 class="h4 mb-0 mt-3">{{ $follow->name }}
+                                                                        </h4>
+                                                                        <p class="card-text"
+                                                                            style="text-transform: capitalize;">
+                                                                            {{ $follow->option }}</p>
+                                                                    </div>
+                                                                    <div class="card-footer text-center">
+                                                                        <div class="row user-social-detail">
+                                                                            <div
+                                                                                class="social-profile me-4 rounded text-center">
+                                                                                <a href="javascript:void(0)"><i
+                                                                                        class="fa fa-paper-plane"></i></a>
+                                                                            </div>
+                                                                            <div
+                                                                                class="social-profile me-4 rounded text-center">
+                                                                                <a
+                                                                                    href="{{ route('profile.show', $follow->id) }}"><i
+                                                                                        class="fa fa-eye"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-                                                                                    <a class="btn text-primary btn-sm"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-original-title="View Profile"
-                                                                                        href="{{ route('profile.show', $follow->id) }}"
-                                                                                        target="_blank"><span
-                                                                                            class="fe fe-eye fs-14"></span></a>
-
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                @endforeach
-                                                            </table>
-                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
 
                                                 </div>
@@ -320,7 +266,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- ROW CLOSED -->
             </div>
             <!-- CONTAINER CLOSED -->
@@ -337,8 +283,7 @@
                 </div>
                 <div class="card-options ms-auto">
                     <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                            class="fe fe-x text-white"></i></a>
+                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i class="fe fe-x text-white"></i></a>
                 </div>
             </div>
             <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
