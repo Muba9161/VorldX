@@ -113,7 +113,7 @@
                                                     <div class="media-body">
                                                         <span class="text-muted">Posts</span>
                                                         <div class="fw-semibold fs-25">
-                                                            328
+                                                            {{ $posts->count() }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -282,258 +282,127 @@
                             <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="profile-edit">
-                                            <textarea class="form-control" placeholder="What's in your mind right now" rows="7"></textarea>
+                                        <form action="{{ route('profile.posts.store') }}" method="POST"
+                                            class="profile-edit">
+                                            @csrf
+                                            <input class="form-control my-4" type="text" name="title"
+                                                placeholder="Post Title" required>
+                                            <textarea class="form-control" placeholder="Right Your Post" rows="7" name="content" required></textarea>
                                             <div class="profile-share border-top-0">
                                                 <div class="mt-2">
                                                     <a href="javascript:void(0)" class="me-2" title="Audio"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"><span
-                                                            class="text-muted"><i class="fe fe-mic"></i></span></a>
+                                                        data-bs-toggle="tooltip" data-bs-placement="top">
+                                                        <span class="text-muted"><i class="fe fe-mic"></i></span>
+                                                    </a>
                                                     <a href="javascript:void(0)" class="me-2" title="Video"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"><span
-                                                            class="text-muted"><i class="fe fe-video"></i></span></a>
+                                                        data-bs-toggle="tooltip" data-bs-placement="top">
+                                                        <span class="text-muted"><i class="fe fe-video"></i></span>
+                                                    </a>
                                                     <a href="javascript:void(0)" class="me-2" title="Image"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"><span
-                                                            class="text-muted"><i class="fe fe-image"></i></span></a>
+                                                        data-bs-toggle="tooltip" data-bs-placement="top">
+                                                        <span class="text-muted"><i class="fe fe-image"></i></span>
+                                                    </a>
                                                 </div>
-                                                <button class="btn btn-sm btn-success ms-auto"><i
-                                                        class="fa fa-share ms-1"></i> Share</button>
+                                                <button type="submit" class="btn btn-sm btn-success ms-auto">
+                                                    <i class="fa fa-share ms-1"></i> Share
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="card border p-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <div class="media mt-0">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt=""
-                                                            class="rounded-circle avatar avatar-md"
-                                                            src="../assets/images/users/16.jpg"></div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-0 mt-1">Peter Hill</h6>
-                                                    <small class="text-muted">just now</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="dropdown show">
-                                                    <a class="new option-dots" href="JavaScript:void(0);"
-                                                        data-bs-toggle="dropdown">
-                                                        <span class=""><i class="fe fe-more-vertical"></i></span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="javascript:void(0)">Edit Post</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)">Delete Post</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)">Personal
-                                                            Settings</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-4">
-                                            <h4 class="fw-semibold mt-3">There is nothing more beautiful.</h4>
-                                            <p class="mb-0">There are many variations of passages of Lorem Ipsum
-                                                available, but the majority have suffered alteration in some form, by
-                                                injected humour, or randomised words which don't look even slightly
-                                                believable.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer user-pro-2">
-                                        <div class="media mt-0">
-                                            <div class="media-user me-2">
-                                                <div class="avatar-list avatar-list-stacked">
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/12.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/2.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/9.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/2.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/4.jpg)"></span>
-                                                    <span class="avatar brround text-primary">+28</span>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="mb-0 mt-2 ms-2">28 people like your photo</h6>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="d-flex mt-1">
-                                                    <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-heart"></i></span></a>
-                                                    <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-message-square"></i></span></a>
-                                                    <a class="new text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-share-2"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card border p-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <div class="media mt-0">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt=""
-                                                            class="rounded-circle avatar avatar-md"
-                                                            src="../assets/images/users/16.jpg"></div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-0 mt-1">Peter Hill</h6>
-                                                    <small class="text-muted">Sep 26 2019, 10:14am</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="dropdown show">
-                                                    <a class="new option-dots" href="JavaScript:void(0);"
-                                                        data-bs-toggle="dropdown">
-                                                        <span class=""><i class="fe fe-more-vertical"></i></span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="javascript:void(0)">Edit Post</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)">Delete Post</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)">Personal
-                                                            Settings</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-4">
+                                @foreach ($posts as $post)
+                                    <div class="card border p-0 shadow-none">
+                                        <div class="card-body">
                                             <div class="d-flex">
-                                                <a href="gallery.html" class="w-30 m-2"><img
-                                                        src="../assets/images/media/22.jpg" alt="img"
-                                                        class="br-5"></a>
-                                                <a href="gallery.html" class="w-30 m-2"><img
-                                                        src="../assets/images//media/24.jpg" alt="img"
-                                                        class="br-5"></a>
-                                            </div>
-                                            <h4 class="fw-semibold mt-3">There is nothing more beautiful.</h4>
-                                            <p class="mb-0">There are many variations of passages of Lorem Ipsum
-                                                available, but the majority have suffered alteration in some form, by
-                                                injected humour, or randomised words which don't look even slightly
-                                                believable.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer user-pro-2">
-                                        <div class="media mt-0">
-                                            <div class="media-user me-2">
-                                                <div class="avatar-list avatar-list-stacked">
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/12.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/2.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/9.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/2.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/4.jpg)"></span>
-                                                    <span class="avatar brround text-primary">+28</span>
+                                                <div class="media mt-0">
+                                                    <div class="media-user me-2">
+                                                        <div class=""><img alt=""
+                                                                class="rounded-circle avatar avatar-md"
+                                                                style="object-fit: cover;"
+                                                                src="{{ asset('storage/profile_pictures/' . $post->user->profile_picture) }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-0 mt-1">{{ $post->user->name }}</h6>
+                                                        @if ($post->created_at->isToday())
+                                                            <small
+                                                                class="text-muted">{{ $post->created_at->diffForHumans() }}</small>
+                                                        @else
+                                                            <small
+                                                                class="text-muted">{{ $post->created_at->format('d-m-Y h:m A') }}</small>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <div class="dropdown show">
+                                                        <a class="new option-dots" href="JavaScript:void(0);"
+                                                            data-bs-toggle="dropdown">
+                                                            <span class=""><i
+                                                                    class="fe fe-more-vertical"></i></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <a class="dropdown-item" href="javascript:void(0)">Edit
+                                                                Post</a>
+                                                            {{-- <a class="dropdown-item" href="{{route('profile.posts.destroy', $post->id)}}">Delete
+                                                                Post</a> --}}
+                                                            <form action="{{ route('profile.posts.destroy', $post->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="dropdown-item">Delete
+                                                                    Post</button>
+                                                            </form>
+                                                            <a class="dropdown-item" href="javascript:void(0)">Personal
+                                                                Settings</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="media-body">
-                                                <h6 class="mb-0 mt-2 ms-2">28 people like your photo</h6>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="d-flex mt-1">
-                                                    <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-heart"></i></span></a>
-                                                    <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-message-square"></i></span></a>
-                                                    <a class="new text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-share-2"></i></span></a>
-                                                </div>
+                                            <div class="mt-4">
+                                                <h4 class="fw-semibold mt-3">{{ $post->title }}</h4>
+                                                <p class="mb-0">{{ $post->content }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="card border p-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex">
+                                        <div class="card-footer user-pro-2">
                                             <div class="media mt-0">
-                                                <div class="media-user me-2">
-                                                    <div class=""><img alt=""
-                                                            class="rounded-circle avatar avatar-md"
-                                                            src="../assets/images/users/16.jpg"></div>
+                                                <div class="mt-3">
+                                                    <form action="{{ route('profile.replies.store') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="post_id"
+                                                            value="{{ $post->id }}">
+                                                        <textarea name="content" class="form-control" placeholder="Reply to this post" required></textarea>
+                                                        {{-- <button type="submit" class="btn btn-primary mt-2">Reply</button> --}}
+                                                        <button type="submit" class="btn btn-sm btn-success my-3">
+                                                            <i class="fa fa-share ms-1"></i> Reply
+                                                        </button>
+                                                    </form>
+                                                    @if ($post->replies->count() > 0)
+                                                        <div class="mt-3">
+                                                            @foreach ($post->replies as $reply)
+                                                                @include('posts.partials.reply', [
+                                                                    'reply' => $reply,
+                                                                ])
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
                                                 </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-0 mt-1">Peter Hill</h6>
-                                                    <small class="text-muted">Sep 24 2019, 09:14am</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="dropdown show">
-                                                    <a class="new option-dots" href="JavaScript:void(0);"
-                                                        data-bs-toggle="dropdown">
-                                                        <span class=""><i class="fe fe-more-vertical"></i></span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="javascript:void(0)">Edit Post</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)">Delete Post</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)">Personal
-                                                            Settings</a>
+                                                <div class="ms-auto">
+                                                    <div class="d-flex mt-1">
+                                                        {{-- <a class="new me-2 text-muted fs-16"
+                                                            href="JavaScript:void(0);"><span class=""><i
+                                                                    class="fe fe-heart"></i></span></a>
+                                                        <a class="new me-2 text-muted fs-16"
+                                                            href="JavaScript:void(0);"><span class=""><i
+                                                                    class="fe fe-message-square"></i></span></a> --}}
+                                                        <a class="new text-muted fs-16" href="JavaScript:void(0);"><span
+                                                                class=""><i class="fe fe-share-2"></i></span></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-4">
-                                            <div class="d-flex">
-                                                <a href="gallery.html" class="w-30 m-2"><img
-                                                        src="../assets/images/media/26.jpg" alt="img"
-                                                        class="br-5"></a>
-                                                <a href="gallery.html" class="w-30 m-2"><img
-                                                        src="../assets/images/media/23.jpg" alt="img"
-                                                        class="br-5"></a>
-                                                <a href="gallery.html" class="w-30 m-2"><img
-                                                        src="../assets/images/media/21.jpg" alt="img"
-                                                        class="br-5"></a>
-                                            </div>
-                                            <h4 class="fw-semibold mt-3">There is nothing more beautiful.</h4>
-                                            <p class="mb-0">There are many variations of passages of Lorem Ipsum
-                                                available, but the majority have suffered alteration in some form, by
-                                                injected humour, or randomised words which don't look even slightly
-                                                believable.
-                                            </p>
-                                        </div>
                                     </div>
-                                    <div class="card-footer user-pro-2">
-                                        <div class="media mt-0">
-                                            <div class="media-user me-2">
-                                                <div class="avatar-list avatar-list-stacked">
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/12.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/2.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/9.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/2.jpg)"></span>
-                                                    <span class="avatar brround"
-                                                        style="background-image: url(../assets/images/users/4.jpg)"></span>
-                                                    <span class="avatar brround text-primary">+28</span>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="mb-0 mt-2 ms-2">28 people like your photo</h6>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <div class="d-flex mt-1">
-                                                    <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-heart"></i></span></a>
-                                                    <a class="new me-2 text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-message-square"></i></span></a>
-                                                    <a class="new text-muted fs-16" href="JavaScript:void(0);"><span
-                                                            class=""><i class="fe fe-share-2"></i></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="col-xl-3">
                                 <div class="card">
@@ -547,8 +416,9 @@
                                                     <span
                                                         class="avatar cover-image avatar-md brround bg-pink me-3">UK</span>
                                                     <div class="media-body valign-middle mt-2">
-                                                        <a href="javascript:void(0)" class="fw-semibold text-dark">{{$list->name}}</a>
-                                                        <p class="text-muted mb-0">{{$list->email}}</p>
+                                                        <a href="javascript:void(0)"
+                                                            class="fw-semibold text-dark">{{ $list->name }}</a>
+                                                        <p class="text-muted mb-0">{{ $list->email }}</p>
                                                     </div>
                                                     <div class="media-body valign-middle text-end overflow-visible mt-1">
                                                         <button class="btn btn-sm btn-secondary"

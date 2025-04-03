@@ -45,6 +45,9 @@
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-treed/0.1.5/jquery.treed.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treed/0.1.5/css/jquery.treed.css" rel="stylesheet" />
+
 
 
 
@@ -104,7 +107,8 @@
                                             </a>
                                             <div class="dropdown-menu header-search dropdown-menu-start">
                                                 <div class="input-group w-100 p-2">
-                                                    <input type="text" class="form-control" placeholder="Search....">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Search....">
                                                     <div class="input-group-text btn btn-primary">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
                                                     </div>
@@ -115,7 +119,7 @@
                                             <a class="nav-link icon text-center" href="{{ route('followlist') }}"
                                                 target="_blank" data-bs-toggle="tooltip"
                                                 data-bs-original-title="Connect Around">
-                                                <i class="fe fe-radio   "></i><span
+                                                <i class="fe fe-users"></i><span
                                                     class="fs-16 ms-2 d-none d-xl-block"></span>
                                             </a>
                                         </div>
@@ -126,69 +130,7 @@
                                                 <span class="light-layout"><i class="fe fe-sun"></i></span>
                                             </a>
                                         </div>
-                                        <!-- FULL-SCREEN -->
-                                        <div class="dropdown  d-flex notifications">
-                                            <a class="nav-link icon" data-bs-toggle="dropdown"><i
-                                                    class="fe fe-git-merge"></i><span class=" pulse-danger"></span>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                <div class="drop-heading border-bottom">
-                                                    <div class="d-flex">
-                                                        <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Strings
-                                                        </h6>
-                                                    </div>
-                                                </div>
-                                                <div class="notifications-menu">
-                                                    <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div
-                                                            class="me-3 notifyimg  bg-primary brround box-shadow-primary">
-                                                            <i class="fe fe-mail"></i>
-                                                        </div>
-                                                        <div class="mt-1 wd-80p">
-                                                            <h5 class="notification-label mb-1">New Application
-                                                                received
-                                                            </h5>
-                                                            <span class="notification-subtext">3 days ago</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div
-                                                            class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
-                                                            <i class="fe fe-check-circle"></i>
-                                                        </div>
-                                                        <div class="mt-1 wd-80p">
-                                                            <h5 class="notification-label mb-1">Project has been
-                                                                approved</h5>
-                                                            <span class="notification-subtext">2 hours ago</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div
-                                                            class="me-3 notifyimg  bg-success brround box-shadow-success">
-                                                            <i class="fe fe-shopping-cart"></i>
-                                                        </div>
-                                                        <div class="mt-1 wd-80p">
-                                                            <h5 class="notification-label mb-1">Your Product Delivered
-                                                            </h5>
-                                                            <span class="notification-subtext">30 min ago</span>
-                                                        </div>
-                                                    </a>
-                                                    <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
-                                                            <i class="fe fe-user-plus"></i>
-                                                        </div>
-                                                        <div class="mt-1 wd-80p">
-                                                            <h5 class="notification-label mb-1">Friend Requests</h5>
-                                                            <span class="notification-subtext">1 day ago</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="dropdown-divider m-0"></div>
-                                                <a href="notify-list.html"
-                                                    class="dropdown-item text-center p-3 text-muted">View all
-                                                    Notification</a>
-                                            </div>
-                                        </div>
+
                                         <!-- NOTIFICATIONS -->
                                         <div class="dropdown  d-flex message">
                                             <a class="nav-link icon text-center" data-bs-toggle="dropdown">
@@ -331,21 +273,13 @@
                             </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
-                                <h3>Main</h3>
-                            </li>
-                            <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide"
-                                    href="{{ route('dashboard') }}"><i class="side-menu__icon fe fe-home"></i><span
-                                        class="side-menu__label">Dashboard</span></a>
-                            </li>
-                            <li class="sub-category">
                                 <h3>Personal Kit</h3>
                             </li>
                             <li class="slide">
                                 <a href = "{{ route('profile.index') }}" class="side-menu__item"
                                     data-bs-toggle="slide" href="javascript:void(0)"><i
                                         class="side-menu__icon fe fe-user"></i><span class="side-menu__label">View
-                                        Profile</span></a>
+                                        Catalogue</span></a>
                                 <!-- <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
                                     <li><a href="editprofile.html" class="slide-item">Edit Profile</a></li>
@@ -369,14 +303,45 @@
                                     <li><a href="widgets.html" class="slide-item"> Widgets</a></li>
                                 </ul> -->
                             </li>
+
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
                                         class="side-menu__icon fe fe-clipboard"></i><span
-                                        class="side-menu__label">View
-                                        Resume</span></a>
+                                        class="side-menu__label">Post Board</span></a>
                                 <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
-                                    <li><a href="cards.html" class="slide-item">Edit Resume</a></li>
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Post Board</a></li>
+                                    <li><a href="{{ route('post1') }}" class="slide-item">Page 1</a></li>
+                                    <li><a href="{{ route('post2') }}" class="slide-item">Page 2</a></li>
+                                    <!--<li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
+                                    <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li>
+                                    <li><a href="chat.html" class="slide-item"> Chat</a></li>
+                                    <li><a href="notify.html" class="slide-item"> Notifications</a></li>
+                                    <li><a href="sweetalert.html" class="slide-item"> Sweet alerts</a></li>
+                                    <li><a href="rangeslider.html" class="slide-item"> Range slider</a></li>
+                                    <li><a href="scroll.html" class="slide-item"> Content Scroll bar</a></li>
+                                    <li><a href="loaders.html" class="slide-item"> Loaders</a></li>
+                                    <li><a href="counters.html" class="slide-item"> Counters</a></li>
+                                    <li><a href="rating.html" class="slide-item"> Rating</a></li>
+                                    <li><a href="timeline.html" class="slide-item"> Timeline</a></li>
+                                    <li><a href="treeview.html" class="slide-item"> Treeview</a></li>
+                                    <li><a href="chart.html" class="slide-item"> Charts</a></li>
+                                    <li><a href="footers.html" class="slide-item"> Footers</a></li>
+                                    <li><a href="users-list.html" class="slide-item"> User List</a></li>
+                                    <li><a href="search.html" class="slide-item">Search</a></li>
+                                    <li><a href="crypto-currencies.html" class="slide-item"> Crypto-currencies</a></li>
+                                    <li><a href="widgets.html" class="slide-item"> Widgets</a></li> -->
+                                </ul>
+                            </li>
+
+
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="#"><i
+                                        class="side-menu__icon fe fe-clipboard"></i><span
+                                        class="side-menu__label">String Board</span></a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Page 1</a></li>
+                                    <li><a href="{{ route('calendar_main') }}" class="slide-item">Page 1</a></li>
+                                    <li><a href="{{ route('calender') }}" class="slide-item">Page 2</a></li>
                                     <!--<li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
                                     <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li>
                                     <li><a href="chat.html" class="slide-item"> Chat</a></li>
@@ -416,6 +381,10 @@
                                     class="side-menu__icon fe fe-lock"></i><span class="side-menu__label"
                                     data-bs-target="#vault" data-bs-toggle="modal">Vault</span></a>
                             </li>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                    class="side-menu__icon fe fe-lock"></i><span class="side-menu__label"
+                                    data-bs-target="#vault" data-bs-toggle="modal">Activity</span></a>
+                            </li>
                             <!-- <li>
                                 <a class="side-menu__item has-link" href="landing-page.html" target="_blank"><i
                                         class="side-menu__icon fe fe-zap"></i><span
@@ -425,66 +394,45 @@
                             <li class="sub-category">
                                 <h3>Professional Kit</h3>
                             </li>
-                            <li class="sub-category">
-                                <h3>Already In</h3>
-                            </li>
                             <li class="slide">
-                            <li class="slide">
-                                <a href="{{ route('entity.index') }}" class="side-menu__item" data-bs-toggle="slide"
-                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-briefcase"></i><span
-                                        class="side-menu__label">Entity Manager</span></a>
-                                <!-- <ul class="slide-menu">
-                                        <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
-                                        <li><a href="cards.html" class="slide-item">Dashboard</a></li>
-                                        <li><a href="calendar.html" class="slide-item">Page</a></li>
-                                        <li class="slide">
-                                            <ul class="slide-menu">
-                                                <li class="side-menu-label1"><a href="javascript:void(0)">Page</a></li>
-                                                <li><a href="cards.html" class="slide-item">Add Page</a></li>
-                                            </ul>
-                                        <li><a href="calendar.html" class="slide-item">Product/Client</a></li>
-                                        <li class="slide">
-                                            <ul class="slide-menu">
-                                                <li><a href="cards.html" class="slide-item">Page</a></li>
-                                                <li class="slide">
-                                                    <ul class="slide-menu">
-                                                        <li><a href="cards.html" class="slide-item"> Add Page</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="cards.html" class="slide-item">Product/Client Manager</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="calendar.html" class="slide-item">File Manager</a></li>
-                                        <li><a href="calendar.html" class="slide-item">Role Manager</a></li>
-                                        <li><a href="calendar.html" class="slide-item">Mail Manager</a></li>
-                                    </ul> -->
+                                <a class="side-menu__item has-link" data-bs-toggle="slide"
+                                    href="{{ route('dashboard') }}"><i class="side-menu__icon fe fe-home"></i><span
+                                        class="side-menu__label">Dashboard</span></a>
                             </li>
                             <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('quick-access') }}"><i
                                     class="side-menu__icon fe fe-fast-forward"></i><span
                                     class="side-menu__label">Quick
                                     Access</span></a>
-                            <!-- <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Apps</a></li>
-                                    <li><a href="cards.html" class="slide-item"> Cards design</a></li>
-                                    <li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
-                                    <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li>
-                                    <li><a href="chat.html" class="slide-item"> Chat</a></li>
-                                    <li><a href="notify.html" class="slide-item"> Notifications</a></li>
-                                    <li><a href="sweetalert.html" class="slide-item"> Sweet alerts</a></li>
-                                    <li><a href="rangeslider.html" class="slide-item"> Range slider</a></li>
-                                    <li><a href="scroll.html" class="slide-item"> Content Scroll bar</a></li>
-                                    <li><a href="loaders.html" class="slide-item"> Loaders</a></li>
-                                    <li><a href="counters.html" class="slide-item"> Counters</a></li>
-                                    <li><a href="rating.html" class="slide-item"> Rating</a></li>
-                                    <li><a href="timeline.html" class="slide-item"> Timeline</a></li>
-                                    <li><a href="treeview.html" class="slide-item"> Treeview</a></li>
-                                    <li><a href="chart.html" class="slide-item"> Charts</a></li>
-                                    <li><a href="footers.html" class="slide-item"> Footers</a></li>
-                                    <li><a href="users-list.html" class="slide-item"> User List</a></li>
-                                    <li><a href="search.html" class="slide-item">Search</a></li>
-                                    <li><a href="crypto-currencies.html" class="slide-item"> Crypto-currencies</a></li>
-                                    <li><a href="widgets.html" class="slide-item"> Widgets</a></li>
-                                </ul> -->
+                            <li class="sub-category">
+                                <h3>Entity</h3>
+                            </li>
+                            <li class="slide">
+                            <li class="slide">
+                                <a href="{{ route('entity.index') }}" class="side-menu__item" data-bs-toggle="slide"
+                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-briefcase"></i><span
+                                        class="side-menu__label">Yours</span></a>
+                            </li>
+                            <li class="slide">
+                                <a href="{{ route('entity.index') }}" class="side-menu__item" data-bs-toggle="slide"
+                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-briefcase"></i><span
+                                        class="side-menu__label">Accessible</span></a>
+                            </li>
+                            </li>
+
+                            <li class="sub-category">
+                                <h3>Products</h3>
+                            </li>
+                            <li class="slide">
+                            <li class="slide">
+                                <a href="{{ route('entity.index') }}" class="side-menu__item" data-bs-toggle="slide"
+                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-briefcase"></i><span
+                                        class="side-menu__label">Yours</span></a>
+                            </li>
+                            <li class="slide">
+                                <a href="{{ route('entity.index') }}" class="side-menu__item" data-bs-toggle="slide"
+                                    href="javascript:void(0)"><i class="side-menu__icon fe fe-briefcase"></i><span
+                                        class="side-menu__label">Accessible</span></a>
+                            </li>
                             </li>
 
                             <li class="sub-category">

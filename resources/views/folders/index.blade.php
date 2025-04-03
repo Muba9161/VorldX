@@ -2,7 +2,7 @@
 
 @section('website-page-title', 'File Manager')
 
-@section('website-active-folderx    ', 'active')
+@section('website-active-folderx ', 'active')
 
 @section('website-main-section')
 
@@ -148,16 +148,131 @@
                                 </button>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <!-- col -->
-                                    <div class="col-lg-8 mt-8 mt-lg-0">
-                                        <ul id="tree2">
-                                            <li><a href="javascript:void(0)">File Manager</a>
-
-                                            </li>
-                                        </ul>
+                                <div class="card-body pt-4">
+                                    <div class="list-group list-group-transparent mb-0 file-manager">
+                                        <div class="d-flex">
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="list-group-item  d-flex align-items-center px-0">
+                                                    <i class="fe fe-image fs-18 me-2 text-success p-2"></i>Images
+                                                </a>
+                                            </div>
+                                            <div class="text-end ms-auto mt-3">
+                                                <span class="fs-11  text-dark">20 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-xs mb-3 ms-2">
+                                            <div class="progress-bar bg-green" style="width: 30%;"></div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="list-group-item  d-flex align-items-center px-0">
+                                                    <i class="fe fe-video fs-18 me-2 text-secondary p-2"></i>Videos
+                                                </a>
+                                            </div>
+                                            <div class="text-end ms-auto mt-3">
+                                                <span class="fs-11  text-dark">32.5 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-xs mb-3 ms-2">
+                                            <div class="progress-bar bg-secondary" style="width: 40%;"></div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="list-group-item  d-flex align-items-center px-0">
+                                                    <i class="fe fe-file-text fs-18 me-2 text-primary p-2"></i> Docs
+                                                </a>
+                                            </div>
+                                            <div class="text-end ms-auto mt-3">
+                                                <span class="fs-11  text-dark">14.2 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-xs mb-3 ms-2">
+                                            <div class="progress-bar bg-primary" style="width: 25%;"></div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="list-group-item  d-flex align-items-center px-0">
+                                                    <i class="fe fe-music fs-18 me-2 text-warning p-2"></i> Music
+                                                </a>
+                                            </div>
+                                            <div class="text-end ms-auto mt-3">
+                                                <span class="fs-11  text-dark">13 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-xs mb-3 ms-2">
+                                            <div class="progress-bar bg-warning" style="width: 30%;"></div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="list-group-item  d-flex align-items-center px-0">
+                                                    <i class="fe fe-download fs-18 me-2 text-info p-2"></i> Downloads
+                                                </a>
+                                            </div>
+                                            <div class="text-end ms-auto mt-3">
+                                                <span class="fs-11  text-dark">19.3 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-xs mb-3 ms-2">
+                                            <div class="progress-bar bg-info" style="width: 40%;"></div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div>
+                                                <a href="javascript:void(0);"
+                                                    class="list-group-item  d-flex align-items-center px-0">
+                                                    <i class="fe fe-grid fs-18 me-2 text-danger p-2"></i> More
+                                                </a>
+                                            </div>
+                                            <div class="text-end ms-auto mt-3">
+                                                <span class="fs-11  text-dark">23 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-xs mb-3 ms-2">
+                                            <div class="progress-bar bg-danger" style="width: 45%;"></div>
+                                        </div>
                                     </div>
-
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group list-group-transparent mb-0">
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-primary me-2 fs-12"><i
+                                                    class="fe fe-circle"></i></span>Remote Control
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-secondary me-2 fs-12"><i
+                                                    class="fe fe-circle"></i></span>Google Drive
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-danger me-2 fs-12"><i class="fe fe-circle"></i></span>FTP
+                                            Files
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-warning me-2 fs-12"><i
+                                                    class="fe fe-circle"></i></span>Transfer files
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-success me-2 fs-12"><i class="fe fe-circle"></i></span>Deep
+                                            Clean
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-info me-2 fs-12"><i
+                                                    class="fe fe-circle"></i></span>Favourities
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            class="list-group-item  d-flex align-items-center px-0 py-2">
+                                            <span class="text-pink me-2 fs-12"><i class="fe fe-circle"></i></span>Settings
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -249,15 +364,22 @@
 
 
 
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
+                                                            <a class="dropdown-item" data-bs-target="#access-selector"
+                                                                data-bs-toggle="modal" href="javascript:void(0)"><i
                                                                     class="fe fe-user-check me-2"></i> Manage
                                                                 Access</a>
                                                             <a class="dropdown-item" href="javascript:void(0)"><i
                                                                     class="fe fe-share me-2"></i> Share</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"
-                                                                onclick="addToQuickAccess({{ $folder->id }})">
-                                                                <i class="fe fe-star me-2"></i> Add to Quick Access
-                                                            </a>
+                                                            <form
+                                                                action="{{ route('add-quick', ['folder_id' => $folder->id]) }}"
+                                                                method="POST" style="display: inline;">
+                                                                @csrf
+                                                                <button type="submit" class="dropdown-item"
+                                                                    style="background: none; border: none; padding: 0;">
+                                                                    <i class="fe fe-star me-2"></i> Add to Quick Access
+                                                                </button>
+                                                            </form>
+
                                                             <a class="dropdown-item"
                                                                 href="{{ route('folders.download', ['folder' => $folder->id]) }}"><i
                                                                     class="fe fe-download me-2"></i> Download</a>
@@ -898,6 +1020,73 @@
     </div>
 
 
+    <div class="modal fade" id="access-selector">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    <h6 class="modal-title">Access Manager</h6><button aria-label="Close" class="btn-close"
+                        data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="row p-3">
+                        <li class="col-lg-6 mb-6">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
+                                data-bs-target="#createspace" data-bs-toggle="modal">
+                                <span class="country-selector"><i class="fa fa-user-plus me-3 language text-center"
+                                        style="color: #6c5ffc;"></i></span>Add new Access
+                            </a>
+                        </li>
+                        <li class="col-lg-6 mb-6">
+                            <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
+                                data-bs-target="#createspace" data-bs-toggle="modal">
+                                <span class="country-selector"><i class="fa fa-x me-3 language text-center"
+                                        style="color: red;"></i></span>Manage Access
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {{-- <div class="modal fade" id="access-selector">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    <h6 class="modal-title">Give Access To</h6><button aria-label="Close" class="btn-close"
+                        data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="row p-3">
+                        @if ($followers->isEmpty())
+                            <li class="col-lg-12 mb-12">
+                                <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
+                                    data-bs-target="#createspace" data-bs-toggle="modal">
+                                    <span class="country-selector"><i class="fa fa-x me-3 language text-center"
+                                            style="color: red;"></i></span>Nothing to Show
+                                </a>
+                            </li>
+                        @else
+                            @foreach ($followers as $follower)
+                                <li class="col-lg-6 mb-2">
+                                    <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active"
+                                        data-bs-target="#createspace" data-bs-toggle="modal">
+                                        <span class="country-selector"><i class="fa fa-user me-3 language"
+                                                style="color: #6c5ffc;"></i></span>{{ $follower->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @endif
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 
 
 @endsection

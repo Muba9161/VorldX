@@ -40,9 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/{user}', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/{user}/send', [ChatController::class, 'sendMessage'])->name('chat.send');
     // Route::get('/quick-access', [QuickAccessController::class, 'index'])->name('index');
-    Route::post('/quick-access/add', [QuickAccessController::class, 'addToQuickAccess']);
+    Route::post('/quick-access/add', [QuickAccessController::class, 'addToQuickAccess'])->name('add-quick');
     Route::get('/quick-access', [QuickAccessController::class, 'showQuickAccessFolders'])->name('quick-access');
     Route::post('/quick-access/remove', [QuickAccessController::class, 'removeFromQuickAccess']);
+
+
+    // Route::get('/profile/posts', [PostController::class, 'index'])->name('posts.index');
+    // Route::post('/profile/posts/store', [PostController::class, 'store'])->name('posts.store');
 });
 
 Route::post('/pusher/auth', [ChatController::class, 'pusherAuth'])->middleware('auth');
@@ -50,12 +54,14 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 });
 
+Route::middleware(['auth'])->prefix('profile')->name('profile.')->group(function () {
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::post('/replies', [ReplyController::class, 'store'])->name('replies.store');
+});
 
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-
-Route::post('/replies', [ReplyController::class, 'store'])->name('replies.store');
 
 
 Route::get('/folders', [FolderController::class, 'index'])->name('folders.index');
@@ -70,18 +76,19 @@ Route::delete('/folders/{folder}', [FolderController::class, 'destroy'])->name('
 
 // Entity Route
 Route::get('/entity', [EntityController::class, 'index'])->name('entity.index');
-Route::get('/entity/create', [EntityController::class, 'create'])->name('entity.create');
-// Route::post('/entity', [EntityController::class, 'store'])->name('entity.store');
-Route::post('/entity/{parentId?}', [EntityController::class, 'store'])->name('entity.store');
-Route::get('/entity/{entity}', [EntityController::class, 'show'])->name('entity.show');
-Route::post('/entity/{entity}/copy', [EntityController::class, 'copy'])->name('entity.copy');
-Route::delete('/entity/{entity}', [EntityController::class, 'destroy'])->name('entity.destroy');
+Route::post('/entity/store', [EntityController::class, 'store'])->name('entity.store');
+Route::delete('/entity/{id}', [EntityController::class, 'destroy'])->name('entity.destroy');
 
 
 
 
 // Calender Route
-Route::get('/calender', [CalenderController::class, 'index'])->name('calender');
+Route::get('/calender-main', [CalenderController::class, 'index'])->name('calendar_main');
+Route::get('/calender', [CalenderController::class, 'calender'])->name('calender');
+
+// Posts Route
+Route::get('/post1', [BasicController::class, 'post1'])->name('post1');
+Route::get('/post2', [BasicController::class, 'post2'])->name('post2');
 
 
 // Coming Route

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Folder;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
@@ -13,6 +15,7 @@ class FolderController extends Controller
     // Display the list of folders for the logged-in user, including their subfolders
     public function index()
     {
+        $user = Auth::user();
         // Fetch folders for the logged-in user
         $folders = Folder::where('user_id', Auth::id()) // Only folders of the logged-in user
             ->whereNull('parent_id') // Top-level folders (not subfolders)
@@ -22,7 +25,16 @@ class FolderController extends Controller
         $count = Folder::where('user_id', Auth::id())->whereNull('parent_id')->count(); // Count folders for the logged-in user
         $subcount = Folder::where('user_id', Auth::id())->whereNotNull('parent_id')->count(); // Count folders for the logged-in user
 
-        return view('folders.index', compact('folders', 'count', 'subcount'));
+
+
+        $followerIds = DB::table('follows')
+            ->where('following_id', $user->id)
+            ->pluck('follower_id');
+
+        // Get the follower names from the users table
+        $followers = User::whereIn('id', $followerIds)->get();
+
+        return view('folders.index', compact('folders', 'count', 'subcount', 'followers'));
     }
 
     // Show folder creation form, with option to select a parent folder for subfolders
@@ -80,6 +92,7 @@ class FolderController extends Controller
     // Show details of a specific folder for the logged-in user, including subfolders
     public function show(Folder $folder)
     {
+        $user = Auth::user();
         // Ensure the folder belongs to the logged-in user
         if ($folder->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
@@ -92,7 +105,14 @@ class FolderController extends Controller
         $count = Folder::where('user_id', Auth::id())->whereNull('parent_id')->count(); // Count folders for the logged-in user
         $subcount = Folder::where('user_id', Auth::id())->whereNotNull('parent_id')->count(); // Count folders for the logged-in user
 
-        return view('folders.show', compact('folder', 'folders', 'count', 'subfolders', 'subcount', 'breadcrumb'));
+        $followerIds = DB::table('follows')
+            ->where('following_id', $user->id)
+            ->pluck('follower_id');
+
+        // Get the follower names from the users table
+        $followers = User::whereIn('id', $followerIds)->get();
+
+        return view('folders.show', compact('folder', 'folders', 'count', 'subfolders', 'subcount', 'breadcrumb','followers'));
     }
 
     // Copy Folder Functionality for the logged-in user

@@ -1,271 +1,115 @@
 @extends('layouts.main')
 
-@section('website-page-title', 'File Manager')
+@section('website-page-title', 'Entity')
 
-@section('website-active-entity/index', 'active')
+@section('website-active-entity', 'active')
 
-@section('website-main-section') <!--app-content open-->
-
-
+@section('website-main-section')
     <!--app-content open-->
     <div class="main-content app-content mt-0">
-
-        <!-- Success Modal with overlay -->
-        <div id="successModalOverlay" class="modal-overlay" style="display:none;">
-            <div class="modal-container">
-                <div class="card border p-0 pb-3">
-                    <div class="card-header border-0 pt-3">
-                        <div class="card-options">
-                            <a href="javascript:void(0)" class="card-options-remove" onclick="closeSuccessModal()"><i
-                                    class="fe fe-x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body text-center">
-                        <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                viewBox="0 0 24 24">
-                                <path fill="#13bfa6"
-                                    d="M10.3125,16.09375a.99676.99676,0,0,1-.707-.293L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328l-6.1875,6.1875A.99676.99676,0,0,1,10.3125,16.09375Z"
-                                    opacity=".99" />
-                                <path fill="#71d8c9"
-                                    d="M12,2A10,10,0,1,0,22,12,10.01146,10.01146,0,0,0,12,2Zm5.207,7.61328-6.1875,6.1875a.99963.99963,0,0,1-1.41406,0L6.793,12.98828A.99989.99989,0,0,1,8.207,11.57422l2.10547,2.10547L15.793,8.19922A.99989.99989,0,0,1,17.207,9.61328Z" />
-                            </svg></span>
-                        <h4 class="h4 mb-0 mt-3">Success</h4>
-                        <p class="card-text">Entity deleted successfully</p>
-                    </div>
-                    <div class="card-footer text-center border-0 pt-0">
-                        <div class="row">
-                            <div class="text-center">
-                                <a href="javascript:void(0)" class="btn btn-success" onclick="closeSuccessModal()">Close</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Modal with overlay -->
-        <div id="modalOverlay" class="modal-overlay" style="display:none;">
-            <div class="modal-container">
-                <div class="card border p-0 pb-3">
-                    <div class="card-header border-0 pt-3">
-                        <div class="card-options">
-                            <a href="javascript:void(0)" class="card-options-remove" onclick="closeDeleteModal()"><i
-                                    class="fe fe-x"></i></a>
-                        </div>
-                    </div>
-                    <div class="card-body text-center">
-                        <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60"
-                                viewBox="0 0 24 24">
-                                <path fill="#f07f8f"
-                                    d="M20.05713,22H3.94287A3.02288,3.02288,0,0,1,1.3252,17.46631L9.38232,3.51123a3.02272,3.02272,0,0,1,5.23536,0L22.6748,17.46631A3.02288,3.02288,0,0,1,20.05713,22Z" />
-                                <circle cx="12" cy="17" r="1" fill="#e62a45" />
-                                <path fill="#e62a45" d="M12,14a1,1,0,0,1-1-1V9a1,1,0,0,1,2,0v4A1,1,0,0,1,12,14Z" />
-                            </svg></span>
-                        <h4 class="h4 mb-0 mt-3">Warning</h4>
-                        <p class="card-text" id="deleteMessage">Are you sure you want to delete this entity?
-                        </p>
-                    </div>
-                    <div class="card-footer text-center border-0 pt-0">
-                        <div class="row">
-                            <div class="text-center">
-                                <a href="javascript:void(0)" class="btn btn-white me-2"
-                                    onclick="closeDeleteModal()">Cancel</a>
-                                <a href="javascript:void(0)" class="btn btn-danger" id="confirmDeleteBtn">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <div class="side-app">
+
             <!-- CONTAINER -->
             <div class="main-container container-fluid">
 
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
-                    <h1 class="page-title">Entity Manager</h1>
+                    <h1 class="page-title">Your Entity Tree</h1>
                     <div>
-                        <ol class="breadcrumb1 bg-success">
-                            <li class="breadcrumb-item">
-                                <i class="fa fa-chevron-right me-2 text-white" aria-hidden="true"></i>
-                                <a class="text-white" href="{{ route('entity.index') }}">Entity Manager</a>
-                            </li>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Apps</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Your Entity Tree</li>
                         </ol>
-
                     </div>
-
                 </div>
                 <!-- PAGE-HEADER END -->
-
-                <!-- Row -->
-                <div class="row row-sm">
-                    <div class="col-md-5 col-lg-5 col-xl-3">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="card">
-                            <div class="card-body text-center">
-                                <button class="btn btn-primary btn-block" data-bs-target="#createfile"
-                                    data-bs-toggle="modal">
-                                    <i class="fe fe-plus me-1"></i> Create New
-                                </button>
-                            </div>
                             <div class="card-body">
-                                <div class="list-group list-group-transparent mb-0">
-                                    <a href="#" class="list-group-item d-flex align-items-center px-0 py-2">
-                                        <span class="text-success me-2 fs-12"><i class="fe fe-circle"></i></span>Total
-                                        Entities : {{ $count }}
-                                    </a>
-                                    <a href="#" class="list-group-item d-flex align-items-center px-0 py-2">
-                                        <span class="text-success me-2 fs-12"><i class="fe fe-circle"></i></span>Total
-                                        Sub Entities : {{ $subcount }}
-                                    </a>
+                                <div class="main-content-label mg-b-5">
+                                    Entity Tree
+                                    <button class="btn btn-sm btn-danger p-1 mx-2" data-bs-target="#entityCreate"
+                                        data-bs-toggle="modal"> <i class="fe fe-plus"></i></button>
+                                </div>
+                                {{-- <p class="mg-b-20 card-sub-title fs-12 text-muted">It is Very Easy to Customize
+                                    and it uses in website apllication.</p> --}}
+                                <div class="row">
+                                    @php
+                                        // Group entities by parent_id
+                                        $groupedEntities = $entities->groupBy('parent_id');
+                                    @endphp
+
+                                    {{-- Recursive rendering function --}}
+                                    @php
+                                        function renderEntityTree($entity, $groupedEntities)
+                                        {
+                                            echo '<li>';
+                                            echo '<a href="javascript:void(0)" >' . $entity->entity_name . '</a>';
+                                            echo '<ul>';
+                                            echo '<li>';
+                                            echo '<button class="btn btn-sm mx-1"><i class="fe fe-eye" style="color: rgb(82, 82, 255);"></i>|</button>';
+                                            echo '<button class="btn btn-sm mx-1" data-bs-target="#subCreate" data-bs-toggle="modal" data-id="' .
+                                                $entity->id .
+                                                '" onclick="console.log(' .
+                                                $entity->id .
+                                                ');"><i class="fe fe-plus" style="color: rgb(255, 56, 56);"></i>|</button>';
+                                            echo '<button class="btn btn-sm mx-1"><i class="fe fe-lock" style="color: rgb(234, 234, 0);"></i></button>';
+                                            echo '</li>';
+                                            echo '</ul>';
+
+                                            if (
+                                                isset($groupedEntities[$entity->id]) &&
+                                                $groupedEntities[$entity->id]->isNotEmpty()
+                                            ) {
+                                                echo '<ul>';
+                                                foreach ($groupedEntities[$entity->id] as $childEntity) {
+                                                    renderEntityTree($childEntity, $groupedEntities);
+                                                }
+                                                echo '</ul>';
+                                            } else {
+                                                echo '<ul><li>Nothing to show.</li></ul>';
+                                            }
+
+                                            echo '</li>';
+                                        }
+                                    @endphp
+
+                                    {{-- Loop through the root entities (parent_id is null) --}}
+                                    @foreach ($groupedEntities[null] ?? [] as $entity)
+                                        <div class="col-lg-4">
+                                            <ul id="tree1">
+                                                {{-- Call the recursive rendering function --}}
+                                                @php
+                                                    renderEntityTree($entity, $groupedEntities);
+                                                @endphp
+                                            </ul>
+                                        </div>
+                                    @endforeach
+
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-lg-7 col-xl-9">
-                        <div class="row row-sm">
-                            <div class="text-dark mb-2 ms-1 fs-20 fw-semibold">All Spaces</div>
-                            @if ($entitys->isEmpty())
-                                <div class="col-12">
-                                    <div class="card pos-relative">
-                                        <div class="card-body text-center">
-                                            <h5>No Space to show</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
-                                @foreach ($entitys as $entity)
-                                    <div class="col-xl-4 col-md-6 col-sm-6">
-                                        <div class="card pos-relative">
-                                            {{-- <a href="filemanager-list.html" class="open-file"></a> --}}
-                                            <a href="{{ route('entity.show', $entity->id) }}">
-                                                {{-- <h5 class="text-warning">{{ $folder->name }}</h5> --}}
-                                            </a>
-                                            <div class="card-body px-4 pt-4 pb-2">
-                                                <div class="d-flex">
-                                                    <span class="bg-warning-transparent border border-warning brround">
-                                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                            <path fill="#f7b731"
-                                                                d="M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8H21L4,8V18L6.14,10H23.21L20.93,18.5C20.7,19.37 19.92,20 19,20Z" />
-                                                        </svg>
-                                                    </span>
-                                                    <div class="ms-auto mt-1 file-dropdown">
-                                                        <a href="javascript:void(0)" class="text-muted"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false"><i
-                                                                class="fe fe-more-vertical fs-18"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-start">
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-user me-2"></i> Profile</a>
-                                                            <!-- Copy Link -->
-                                                            <a class="dropdown-item" href="javascript:void(0)"
-                                                                id="copy-folder-link"
-                                                                data-folder-id="{{ $entity->id }}">
-                                                                <i class="fe fe-copy me-2"></i> Copy
-                                                            </a>
-
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-clipboard me-2"></i> Paste</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-move me-2"></i> Move</a>
-
-                                                            <button onclick="openDeleteModal({{ $entity->id }})"
-                                                                class="dropdown-item">
-                                                                <i class="fe fe-trash me-2"></i> Delete
-                                                            </button>
-
-                                                            <!-- Success/Error Message Display -->
-                                                            @if (session('success'))
-                                                                <div class="alert alert-success">
-                                                                    {{ session('success') }}
-                                                                </div>
-                                                            @endif
-
-                                                            @if (session('error'))
-                                                                <div class="alert alert-danger">
-                                                                    {{ session('error') }}
-                                                                </div>
-                                                            @endif
-
-
-
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-user-check me-2"></i> Manage
-                                                                Access</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-share me-2"></i> Share</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                                    class="fe fe-trash me-2"></i> Dashboard</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card-footer border-top-0">
-                                                <div class="d-flex">
-                                                    <div>
-                                                        <a href="{{ route('entity.show', $entity->id) }}">
-                                                            <h5 class="text-warning">{{ $entity->name }}</h5>
-                                                        </a>
-                                                    </div>
-                                                    <div class="ms-auto mt-4">
-                                                        <!-- <h6 class="">23 MB</h6> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                            {{-- <div class="col-xl-3 col-md-6 col-sm-6">
-                                <div class="card pos-relative">
-                                    <a href="#" class="open-file" data-bs-target="#createfile"></a>
-                                    <div class="card-body px-4 pt-4 pb-2">
-                                        <div class="d-flex">
-                                            <span class="bg-danger-transparent border border-danger brround">
-                                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                    <path fill="#e82646" d="M12 5v14M5 12h14" stroke="#e82646"
-                                                        stroke-width="2" stroke-linecap="round" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer border-top-0">
-                                        <div class="d-flex">
-                                            <div>
-                                                <h5 class="text-danger">Create New</h5>
-                                            </div>
-                                            <div class="ms-auto mt-4">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
-                <!-- End Row -->
+                <!-- ROW CLOSED -->
             </div>
-            <!-- CONTAINER CLOSED -->
+            <!-- CONTAINER END -->
+
         </div>
     </div>
-
-    <!--app-content closed-->
+    <!--app-content close-->
     </div>
 
     <!-- Sidebar-right -->
     <div class="sidebar sidebar-right sidebar-animate">
         <div class="panel panel-primary card mb-0 shadow-none border-0">
             <div class="tab-menu-heading border-0 d-flex p-3">
-                <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Workflow
+                <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Notifications
                 </div>
                 <div class="card-options ms-auto">
                     <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1"
-                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i
-                            class="fe fe-x text-white"></i></a>
+                        data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i class="fe fe-x text-white"></i></a>
                 </div>
             </div>
             <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
@@ -273,9 +117,10 @@
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
                         <li class=""><a href="#side1" class="active" data-bs-toggle="tab"><i
-                                    class="fe fe-git-branch me-1"></i>Strings</a></li>
-                        <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-mail"></i> Mail</a></li>
-                        <li><a href="#side3" data-bs-toggle="tab"><i class="fe fe-clock me-1"></i>Activity</a>
+                                    class="fe fe-settings me-1"></i>Feeds</a></li>
+                        <li><a href="#side2" data-bs-toggle="tab"><i class="fe fe-message-circle"></i> Chat</a>
+                        </li>
+                        <li><a href="#side3" data-bs-toggle="tab"><i class="fe fe-anchor me-1"></i>Timeline</a>
                         </li>
                     </ul>
                 </div>
@@ -747,35 +592,113 @@
     </div>
     <!--/Sidebar-right-->
 
-    <!-- Modal -->
-    <div class="modal" id="createfile">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-content-demo">
+    <!-- Internal Dtree Treeview js -->
+    <script src="../assets/plugins/dtree/dtree.js"></script>
+    <script src="../assets/plugins/dtree/dtree1.js"></script>
+
+    <!-- Internal Treeview js -->
+    <script src="../assets/plugins/treeview/treeview.js"></script>
+
+
+
+
+
+    {{-- Modal for Entity creation --}}
+    <div class="modal fade" id="entityCreate">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
                 <div class="modal-header">
                     {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
                 </div>
                 <div class="modal-body">
                     <!-- Folder Creation Form -->
-                    <h2>Create Space</h2>
-                    <form action="{{ route('entity.store', $entity->parent_id ?? null) }}" method="POST">
+                    <h2>Create Entity</h2>
+                    <form action="{{ route('entity.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Space Name</label>
+                            <label class="form-label">Entity Name</label>
                             <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Entity Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password" id="password" class="form-control" required>
+                                <button class="btn btn-outline-success" type="button" id="togglePassword">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Create</button>
-                        <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button"
+                            data-bs-target="#option-selector" data-bs-toggle="modal">Cancel</button>
                     </form>
                     <hr>
                 </div>
-                {{-- <div class="modal-footer">
-                <button class="btn ripple btn-primary" type="button">Add</button>
-            </div> --}}
             </div>
         </div>
     </div>
 
-    <!-- End Modal -->
 
+    {{-- Modal for creation --}}
+    <div class="modal fade" id="subCreate">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content country-select-modal">
+                <div class="modal-header">
+                    {{-- <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button> --}}
+                </div>
+                <div class="modal-body">
+                    <!-- Folder Creation Form -->
+                    <h2>Create</h2>
+                    <form action="{{ route('entity.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="entity_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="text" name="password" class="form-control" required>
+                        </div>
+
+                        <input type="hidden" name="parent_id" id="parent_id_input" value="">
+
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button"
+                            data-bs-target="#subCreate" data-bs-toggle="modal">Cancel</button>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('subCreate').addEventListener('show.bs.modal', function(event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget;
+            // Extract info from data-id attributes
+            var parentId = button.getAttribute('data-id');
+            // Update the modal's content.
+            var parentIdInput = document.getElementById('parent_id_input');
+            console.log(parent_id_input);
+            parentIdInput.value = parentId;
+        });
+    </script>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const togglePasswordButton = document.getElementById('togglePassword');
+
+        togglePasswordButton.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    </script>
 @endsection

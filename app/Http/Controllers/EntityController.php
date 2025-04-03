@@ -3,90 +3,101 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entity;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class EntityController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $entitys = Entity::where('user_id', Auth::id())
-            ->whereNull('parent_id')
-            ->with('subfolders')
-            ->get();
+        $user = auth()->user();
 
-        $count = Entity::where('user_id', Auth::id())->whereNull('parent_id')->count();
-        $subcount = Entity::where('user_id', Auth::id())->whereNotNull('parent_id')->count();
-
-        return view('entity.index', compact('entitys', 'count', 'subcount'));
+        $entities = $user->entities;
+        return view('entity.index', compact('entities'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $entitys = Entity::where('user_id', Auth::id())->get();
-        return view('entity.create', compact('entitys'));
+        //
     }
 
-    public function store(Request $request, $parentId = null)
+    /**
+     * Store a newly created resource in storage.
+     */
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'entity_name' => 'required|string|max:255',
+    //         'password' => 'required|string|min:8',
+    //         'parent_id' => 'nullable|integer|exists:entities,id', // Corrected table name
+    //     ]);
+
+    //     $entity = new Entity();
+    //     $entity->user_id = Auth::id();
+    //     $entity->entity_name = $request->input('entity_name');
+    //     $entity->password = Hash::make($request->input('password'));
+    //     $entity->parent_id = $request->input('parent_id');
+    //     $entity->save();
+
+    //     return redirect()->route('entity.index')->with('success', 'Entity Created Successfully');
+    // }
+
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:folders,id',
+            'name' => 'required|string|max:255', // Name to be saved in users table's name column
+            'email' => 'required|string|email|max:255|unique:users', // Email to be saved in users table's email column
+            'password' => 'required|string|min:8',
+            // parent_id is not a column in users table, so remove it
         ]);
 
-        $parentId = $parentId ?: null;
+        $user = new User();
+        $user->name = $request->input('name'); // Save entity_name as name
+        $user->email = $request->input('email'); // Save email as email
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
 
-        Entity::create([
-            'name' => $request->name,
-            'parent_id' => $request->parent_id,
-            'user_id' => Auth::id(),
-        ]);
-
-        return back()->with('success', 'Folder created successfully!');
+        return redirect()->route('entity.index')->with('success', 'User Created Successfully');
     }
 
+
+    /**
+     * Display the specified resource.
+     */
     public function show(Entity $entity)
     {
-        if ($entity->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        $entitys = $entity->entityfolder;
-        $count = Entity::where('user_id', Auth::id())->whereNull('parent_id')->count();
-        $subcount = Entity::where('user_id', Auth::id())->whereNotNull('parent_id')->count();
-        $breadcrumb = Entity::getBreadcrumb($entity);
-
-        return view('entity.show', compact('entity', 'entitys', 'count', 'subcount','breadcrumb'));
+        //
     }
 
-    public function copy(Request $request, Entity $entity)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Entity $entity)
     {
-        $request->validate([
-            'new_parent_id' => 'nullable|exists:folders,id',
-        ]);
-
-        if ($entity->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        session(['copied_folder_id' => $entity->id]);
-
-        return redirect()->route('folders.index')->with('success', 'Folder copied successfully!');
+        //
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Entity $entity)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Entity $entity)
     {
-        if ($entity->user_id !== Auth::id()) {
-            return response()->json([
-                'message' => 'Unauthorized action!',
-            ], 403);
-        }
-
-        $entity->delete();
-
-        return response()->json([
-            'message' => 'Entity deleted successfully!',
-            'folderId' => $entity->id,
-        ]);
+        //
     }
 }

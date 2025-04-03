@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,7 +44,9 @@ class ProfileController extends Controller
         // Count following
         $followingCount = $following->count();
 
-        return view('profile.index', ['user' => Auth::user()], compact('followers', 'following', 'followerCount', 'followingCount'));
+        $posts = Post::with('replies')->latest()->get();
+
+        return view('profile.index',compact('posts','user','followers', 'following', 'followerCount', 'followingCount'));
     }
 
     public function edit(): View
@@ -157,7 +160,9 @@ class ProfileController extends Controller
         // Count following
         $followingCount = $following->count();
 
-        return view('profile.show', compact('user','followers', 'following', 'followerCount', 'followingCount'));
+        $posts = Post::with('replies')->latest()->get();
+
+        return view('profile.show', compact('posts','user','followers', 'following', 'followerCount', 'followingCount'));
         // return view('profile.show', compact('user'));
     }
 

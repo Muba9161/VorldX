@@ -297,6 +297,19 @@
 {{-- Chat JS --}}
 <script src="{{ asset('../assets/js/chat.js') }}"></script>
 
+<!-- Internal Dtree Treeview js -->
+<script src="{{ asset('../assets/plugins/dtree/dtree.js') }}"></script>
+{{-- <script src="{{asset('../assets/plugins/dtree/dtree1.js')}}"></script> --}}
+
+<!-- Internal Treeview js -->
+{{-- <script src="{{asset('../assets/plugins/treeview/treeview.js')}}"></script> --}}
+
+
+<!-- FULL CALENDAR JS -->
+<script src='{{asset('../assets/plugins/fullcalendar/moment.min.js')}}'></script>
+<script src='{{asset('../assets/plugins/fullcalendar/fullcalendar.min.js')}}'></script>
+<script src='{{asset('../assets/js/fullcalendar.js')}}'></script>
+
 
 <script>
     window.onload = function() {
