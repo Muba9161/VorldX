@@ -31,7 +31,6 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'option' => ['required', 'in:entity,individual'],  // Ensure 'option' is validated
         ]);
 
         // \Log::info('Validated Option:', ['option' => $validated['option']]);
@@ -41,7 +40,7 @@ class RegisteredUserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'option' => $validated['option'],  // Store the selected option ('entity' or 'individual')
+            'option' => 'user',
         ]);
 
         // Log the user in automatically after registration

@@ -90,29 +90,35 @@ class FolderController extends Controller
 
 
     // Show details of a specific folder for the logged-in user, including subfolders
-    public function show(Folder $folder)
+    public function show(Request $request, Folder $folder)
     {
         $user = Auth::user();
-        // Ensure the folder belongs to the logged-in user
-        if ($folder->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
+        $userId = $request->input('user_id', Auth::id()); // Get user ID from request or default to logged-in user
 
-        $folders = Folder::where('user_id', Auth::id())->get(); // Show folders for the logged-in user
-        $subfolders = $folder->subfolders; // Fetch subfolders for the current folder
+        // Fetch folders for the specified user
+        $folders = Folder::where('user_id', $userId)->get();
+
+        // Fetch subfolders for the given folder, regardless of user
+        $subfolders = $folder->subfolders;
+
         $breadcrumb = Folder::getBreadcrumb($folder);
 
-        $count = Folder::where('user_id', Auth::id())->whereNull('parent_id')->count(); // Count folders for the logged-in user
-        $subcount = Folder::where('user_id', Auth::id())->whereNotNull('parent_id')->count(); // Count folders for the logged-in user
+        // Count folders for the specified user
+        $count = Folder::where('user_id', $userId)->whereNull('parent_id')->count();
+        $subcount = Folder::where('user_id', $userId)->whereNotNull('parent_id')->count();
 
         $followerIds = DB::table('follows')
-            ->where('following_id', $user->id)
+            ->where('following_id', $userId)
             ->pluck('follower_id');
 
         // Get the follower names from the users table
         $followers = User::whereIn('id', $followerIds)->get();
 
-        return view('folders.show', compact('folder', 'folders', 'count', 'subfolders', 'subcount', 'breadcrumb','followers'));
+        $userEntity = Folder::where('user_id', $userId)->whereNull('parent_id')->first();
+        $entities = Folder::where('user_id', $userId)->get();
+        $groupedEntities = $entities->groupBy('parent_id');
+
+        return view('folders.show', compact('folder', 'folders', 'count', 'subfolders', 'subcount', 'breadcrumb', 'followers', 'userEntity', 'entities', 'groupedEntities', 'userId'));
     }
 
     // Copy Folder Functionality for the logged-in user

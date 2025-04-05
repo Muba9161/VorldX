@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BasicController;
@@ -39,10 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [ChatController::class, 'users'])->name('chat.users');
     Route::get('/chat/{user}', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/{user}/send', [ChatController::class, 'sendMessage'])->name('chat.send');
-    // Route::get('/quick-access', [QuickAccessController::class, 'index'])->name('index');
-    Route::post('/quick-access/add', [QuickAccessController::class, 'addToQuickAccess'])->name('add-quick');
-    Route::get('/quick-access', [QuickAccessController::class, 'showQuickAccessFolders'])->name('quick-access');
-    Route::post('/quick-access/remove', [QuickAccessController::class, 'removeFromQuickAccess']);
 
 
     // Route::get('/profile/posts', [PostController::class, 'index'])->name('posts.index');
@@ -74,10 +71,20 @@ Route::post('/folders/{copiedFolderId}/paste', [FolderController::class, 'paste'
 Route::get('/folders/{folder}/download', [FolderController::class, 'download'])->name('folders.download');
 Route::delete('/folders/{folder}', [FolderController::class, 'destroy'])->name('folders.destroy');
 
+
+// Route::get('/folders/showFolders/{user}', [BasicController::class, 'showFolder'])->name('showFolder');
+// Route::get('folders/{user}', [BasicController::class, 'showFolder'])->name('showFolder');
+// Route::get('entity/showFolders', [BasicController::class, 'showFolder'])->name('showFolder');
+
+
 // Entity Route
 Route::get('/entity', [EntityController::class, 'index'])->name('entity.index');
 Route::post('/entity/store', [EntityController::class, 'store'])->name('entity.store');
 Route::delete('/entity/{id}', [EntityController::class, 'destroy'])->name('entity.destroy');
+
+// Access Manage Route
+Route::get('/entity/access', [AccessController::class, 'index'])->name('access.index');
+Route::post('/entity/access/store/{follow_id}', [AccessController::class, 'store'])->name('access.store');
 
 
 
@@ -127,7 +134,14 @@ Route::post('/vaults/{vault}/copy', [VaultController::class, 'copy'])->name('vau
 Route::post('/vaults/{copiedFolderId}/paste', [VaultController::class, 'paste'])->name('vaults.paste');
 Route::get('/vaults/{vault}/download', [VaultController::class, 'download'])->name('vaults.download');
 Route::delete('/vaults/{vault}', [VaultController::class, 'destroy'])->name('vaults.destroy');
+
+
 Route::post('/login', [AuthenticatedSessionController::class, 'authenticate'])->name('login.authenticate');
+
+// Auto Login
+Route::post('/login-as{id}', [BasicController::class, 'autoLogin'])->name('login.auto');
+Route::post('entity/show', [BasicController::class, 'showFolder'])->name('showFolder');
+
 
 
 

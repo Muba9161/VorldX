@@ -95,14 +95,14 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
 
-                            {{-- Select whether entity or individual --}}
+                            {{-- Select whether entity or individual
                             <div class="wrap-input100 validate-input input-group mt-4" id="selection-toggle">
                                 <label class="input-group-text bg-white text-muted">Who you are?</label>
                                 <select name="option" class="form-control" required>
                                     <option value="entity">Entity</option>
                                     <option value="individual">Individual</option>
                                 </select>
-                            </div>
+                            </div>--}}
                             <x-input-error :messages="$errors->get('option')" class="mt-2" />
 
 

@@ -278,8 +278,7 @@
                             <li class="slide">
                                 <a href = "{{ route('profile.index') }}" class="side-menu__item"
                                     data-bs-toggle="slide" href="javascript:void(0)"><i
-                                        class="side-menu__icon fe fe-user"></i><span class="side-menu__label">View
-                                        Catalogue</span></a>
+                                        class="side-menu__icon fe fe-user"></i><span class="side-menu__label">Portfolio</span></a>
                                 <!-- <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Edit Profile</a></li>
                                     <li><a href="editprofile.html" class="slide-item">Edit Profile</a></li>
@@ -399,7 +398,7 @@
                                     href="{{ route('dashboard') }}"><i class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label">Dashboard</span></a>
                             </li>
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('quick-access') }}"><i
+                            <a class="side-menu__item" data-bs-toggle="slide" href="$"><i
                                     class="side-menu__icon fe fe-fast-forward"></i><span
                                     class="side-menu__label">Quick
                                     Access</span></a>

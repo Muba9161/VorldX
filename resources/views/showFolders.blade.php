@@ -128,7 +128,7 @@
                     <div>
                         <ol class="breadcrumb1 bg-success">
                             <li class="breadcrumb-item1"><i class="fa fa fa-chevron-right me-2 text-white"
-                                    aria-hidden="true"></i><a class="text-white" href="{{ route('folders.index') }}">File
+                                    aria-hidden="true"></i><a class="text-white" href="#">File
                                     Manager</a></li>
 
                         </ol>

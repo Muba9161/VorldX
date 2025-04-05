@@ -66,8 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    // In your User model
     public function entities()
     {
-        return $this->hasMany(Entity::class);
+        return $this->hasMany(User::class, 'parent_id');
     }
 }

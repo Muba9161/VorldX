@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Folder;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\DB;
@@ -59,10 +60,43 @@ class BasicController extends Controller
         // return view('profile.show', compact('user', 'followers', 'following'));
         return view('following', compact('following', 'user', 'following'));
     }
-    public function post1(){
+    public function post1()
+    {
         return view('post1');
     }
-    public function post2(){
+    public function post2()
+    {
         return view('post2');
+    }
+
+    public function autoLogin($id)
+    {
+        FacadesAuth::logout();
+
+        $user = User::find($id);
+
+        if ($user) {
+            FacadesAuth::login($user);
+            return redirect('/dashboard');
+        }
+
+        return redirect('/login')->with('error', 'User/Entity not found.');
+    }
+
+
+    public function showFolder($id)
+    {
+        $search = User::find($id);
+
+        if (!$search) {
+            // Handle the case where the user is not found.
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
+        $folders = Folder::where('user_id', $search->id)->get(); // Use $search->id
+
+        // return redirect()->route('showFolder', compact('folders')); // Incorrect
+
+        return view('folders.show', compact('folders', 'search')); // Render a view, not redirect
     }
 }
